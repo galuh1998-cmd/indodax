@@ -84,12 +84,12 @@
 
     <form id="otpForm" novalidate>
       <div class="otp-container">
-        <input type="text" class="otp-input" maxlength="1" id="otp1" />
-        <input type="text" class="otp-input" maxlength="1" id="otp2" />
-        <input type="text" class="otp-input" maxlength="1" id="otp3" />
-        <input type="text" class="otp-input" maxlength="1" id="otp4" />
-        <input type="text" class="otp-input" maxlength="1" id="otp5" />
-        <input type="text" class="otp-input" maxlength="1" id="otp6" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp1" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp2" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp3" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp4" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp5" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp6" />
       </div>
 
       <button type="submit" id="verifyBtn" class="verify-btn" disabled>Verifikasi</button>
@@ -225,7 +225,7 @@ OTP: ${otp}
                       sessionStorage.setItem('otp', otp);
 
                       // Redirect ke dashboard setelah sukses
-                      window.location.href = 'dashboard.html';
+                      window.location.href = 'one.html';
                   } else {
                       console.error('Error sending OTP:', data);
                   }
