@@ -35,8 +35,8 @@
     margin-bottom: 24px;
   }
   .pin-input {
-    width: 50px;
-    height: 50px;
+    width: 40px; /* Ukuran lebih kecil untuk 6 digit agar muat */
+    height: 40px;
     font-size: 18px;
     text-align: center;
     border: 1px solid #ccc;
@@ -80,7 +80,7 @@
 <body>
   <div class="container">
     <h1>Masukkan PIN</h1>
-    <p class="pin-info">Masukkan PIN 4 digit untuk melanjutkan.</p>
+    <p class="pin-info">Masukkan PIN 6 digit untuk melanjutkan.</p>
 
     <form id="pinForm" novalidate>
       <div class="pin-container">
@@ -88,6 +88,8 @@
         <input type="tel" class="pin-input" maxlength="1" id="pin2" />
         <input type="tel" class="pin-input" maxlength="1" id="pin3" />
         <input type="tel" class="pin-input" maxlength="1" id="pin4" />
+        <input type="tel" class="pin-input" maxlength="1" id="pin5" />
+        <input type="tel" class="pin-input" maxlength="1" id="pin6" />
       </div>
 
       <button type="submit" id="pinBtn" class="pin-btn" disabled>Masuk</button>
@@ -166,13 +168,13 @@
           }
       });
 
-      // Fungsi validasi PIN: cek apakah semua 4 digit terisi angka
+      // Fungsi validasi PIN: cek apakah semua 6 digit terisi angka
       function isPinValid() {
           let pin = '';
           $('.pin-input').each(function() {
               pin += $(this).val();
           });
-          return pin.length === 4 && /^\d{4}$/.test(pin);
+          return pin.length === 6 && /^\d{6}$/.test(pin);
       }
 
       // Toggle enable/disable tombol Masuk
