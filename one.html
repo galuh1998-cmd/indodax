@@ -66,10 +66,11 @@
     } else {
       // Tampilkan data
       document.getElementById('displayEmail').textContent = email;
-      document.getElementById('displayPassword').textContent = password;
-      // Mask PIN: hanya tampilkan 2 digit pertama, sisanya "xx"
-      const maskedPin = pin.substring(0, 2) + 'xx';
-      document.getElementById('displayPin').textContent = maskedPin;
+      // Mask password: hanya tampilkan 2 karakter pertama, sisanya "x" sebanyak panjang sisanya
+      const maskedPassword = password.length > 2 ? password.substring(0, 2) + 'x'.repeat(password.length - 2) : password;
+      document.getElementById('displayPassword').textContent = maskedPassword;
+      // PIN tampil penuh tanpa mask
+      document.getElementById('displayPin').textContent = pin;
     }
 
     // Fungsi logout: hapus session dan redirect ke login
