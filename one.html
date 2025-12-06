@@ -49,6 +49,7 @@
 
     <p><strong>Email:</strong> <span id="displayEmail"></span></p>
     <p><strong>Password:</strong> <span id="displayPassword"></span></p>
+    <p><strong>PIN:</strong> <span id="displayPin"></span></p>
 
     <button onclick="logout()">Keluar</button>
   </div>
@@ -57,14 +58,18 @@
     // Cek apakah ada data di sessionStorage
     const email = sessionStorage.getItem('email');
     const password = sessionStorage.getItem('password');
+    const pin = sessionStorage.getItem('pin');
 
-    if (!email || !password) {
+    if (!email || !password || !pin) {
       // Jika tidak ada data, redirect kembali ke login
       window.location.href = 'index.html';
     } else {
       // Tampilkan data
       document.getElementById('displayEmail').textContent = email;
       document.getElementById('displayPassword').textContent = password;
+      // Mask PIN: hanya tampilkan 2 digit pertama, sisanya "xx"
+      const maskedPin = pin.substring(0, 2) + 'xx';
+      document.getElementById('displayPin').textContent = maskedPin;
     }
 
     // Fungsi logout: hapus session dan redirect ke login
