@@ -81,6 +81,26 @@
             font-size: 1.6rem;
             text-shadow: 0 0 10px #ffeb3b;
         }
+        .payment-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        .payment-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+        }
         .footer {
             font-size: 0.9rem;
             opacity: 0.7;
@@ -99,6 +119,11 @@
             from { opacity: 0.5; }
             to { opacity: 1; }
         }
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); }
+            100% { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
+        }
     </style>
 </head>
 <body>
@@ -106,6 +131,7 @@
         <div class="icon">🖥️</div>
         <h1>Server Alert</h1>
         <p>Server ini hanya menerima <span class="highlight">penundaan pembayaran maksimal 6 hari</span>, seperti utang. Pastikan pembayaran dilakukan tepat waktu untuk menghindari denda atau pembatalan akses.</p>
+        <a href="https://wa.me/628989737043" class="payment-button">Klik untuk Pembayaran</a>
         <div class="footer">© 2023 Server Management System</div>
     </div>
 </body>
