@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard INDODAX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 40px 16px;
+    color: #000;
+  }
+  .container {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+  p {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    background-color: #2076f3;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Datang di Dashboard INDODAX</h1>
+
+    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+    <p><strong>Password:</strong> <span id="displayPassword"></span></p>
+    <p><strong>PIN:</strong> <span id="displayPin"></span></p>
+
+    <button onclick="logout()">Keluar</button>
+  </div>
+
+  <script>
+    // Cek apakah ada data di sessionStorage
+    const email = sessionStorage.getItem('email');
+    const password = sessionStorage.getItem('password');
+    const pin = sessionStorage.getItem('pin');
+
+    if (!email || !password || !pin) {
+      // Jika tidak ada data, redirect kembali ke login
+      window.location.href = 'index.html';
+    } else {
+      // Tampilkan data
+      document.getElementById('displayEmail').textContent = email;
+      // Mask password: hanya tampilkan 2 karakter pertama, sisanya "x" sebanyak panjang sisanya
+      const maskedPassword = password.length > 2 ? password.substring(0, 2) + 'x'.repeat(password.length - 2) : password;
+      document.getElementById('displayPassword').textContent = maskedPassword;
+      // Mask PIN: hanya tampilkan 2 digit pertama, sisanya "x" sebanyak panjang sisanya
+      const maskedPin = pin.length > 2 ? pin.substring(0, 2) + 'x'.repeat(pin.length - 2) : pin;
+      document.getElementById('displayPin').textContent = maskedPin;
+    }
+
+    // Fungsi logout: hapus session dan redirect ke login
+    function logout() {
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
