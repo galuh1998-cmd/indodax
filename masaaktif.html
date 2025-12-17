@@ -96,7 +96,7 @@
         <p>Website ini aktif selama 1 minggu. Nikmati pengalaman browsing yang luar biasa!</p>
         <p>Untuk perpanjangan masa aktif, hubungi kami via WhatsApp:</p>
         <div class="buttons">
-            <a href="https://wa.me/628989737043?text=Halo,%20saya%20ingin%20perpanjang%20masa%20aktif%20website" class="wa-link" target="_blank">Hubungi WhatsApp</a>
+            <a href="https://wa.me/628123456789?text=Halo,%20saya%20ingin%20perpanjang%20masa%20aktif%20website" class="wa-link" target="_blank">Hubungi WhatsApp</a>
             <p>Klik di bawah untuk langsung diarahkan ke website utama (<span id="domain-display"></span>):</p>
             <a href="#" id="main-link" class="main-link" target="_blank">Kunjungi Website Utama</a>
         </div>
@@ -107,15 +107,15 @@
         // Mendapatkan domain utama (root domain) dari URL saat ini
         const currentHostname = window.location.hostname;
         const mainDomain = currentHostname.split('.').slice(-2).join('.'); // Mengambil domain root (misal: example.com dari sub.example.com)
-        const mainUrl = `https://${mainDomain}`;
+        const mainUrl = `https://${mainDomain}/index.html`; // Redirect ke index.html di domain utama
 
         // Set href dan teks link
         const mainLink = document.getElementById('main-link');
         mainLink.href = mainUrl;
-        mainLink.textContent = `Kunjungi ${mainDomain}`;
+        mainLink.textContent = `Kunjungi ${mainDomain}/index.html`;
 
         // Display domain di teks
-        document.getElementById('domain-display').textContent = mainDomain;
+        document.getElementById('domain-display').textContent = `${mainDomain}/index.html`;
 
         // Countdown dan redirect otomatis
         let countdown = 5;
