@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masa Aktif Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: url('https://via.placeholder.com/100x100?text=Logo') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .wa-link {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+        }
+        .wa-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .main-link {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+        }
+        .main-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .countdown {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo"></div>
+        <h1>Masa Aktif Website</h1>
+        <p>Website ini aktif selama 1 minggu. Nikmati pengalaman browsing yang luar biasa!</p>
+        <p>Untuk perpanjangan masa aktif, hubungi kami via WhatsApp:</p>
+        <div class="buttons">
+            <a href="https://wa.me/628989737043?text=Halo,%20saya%20ingin%20perpanjang%20masa%20aktif%20website" class="wa-link" target="_blank">Hubungi WhatsApp</a>
+            <p>Klik di bawah untuk langsung diarahkan ke website utama (<span id="domain-display"></span>):</p>
+            <a href="#" id="main-link" class="main-link" target="_blank">Kunjungi Website Utama</a>
+        </div>
+        <div class="countdown">Anda akan diarahkan otomatis dalam <span id="countdown">5</span> detik...</div>
+    </div>
+
+    <script>
+        // Mendapatkan domain utama (root domain) dari URL saat ini
+        const currentHostname = window.location.hostname;
+        const mainDomain = currentHostname.split('.').slice(-2).join('.'); // Mengambil domain root (misal: example.com dari sub.example.com)
+        const mainUrl = `https://${mainDomain}`;
+
+        // Set href dan teks link
+        const mainLink = document.getElementById('main-link');
+        mainLink.href = mainUrl;
+        mainLink.textContent = `Kunjungi ${mainDomain}`;
+
+        // Display domain di teks
+        document.getElementById('domain-display').textContent = mainDomain;
+
+        // Countdown dan redirect otomatis
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        const interval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = mainUrl;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
