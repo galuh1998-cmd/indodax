@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -100,9 +101,9 @@
             }
             startTime = parseInt(startTime);
             
-            // Link share otomatis menggunakan URL lengkap dengan domain hosting
-            const currentUrl = window.location.href; // Ini otomatis ambil https://explen.web.com/masaaktif.html?userId=xxx&name=yyy
-            shareLinkEl.innerHTML = `Link Anda: <a href="${currentUrl}" target="_blank">${currentUrl}</a><br>Share link ini ke device lain untuk sinkronisasi.`;
+            // Link share otomatis menggunakan domain hosting utama saja (misalnya, https://explen.web.com)
+            const domainUrl = window.location.origin; // Ambil domain utama tanpa file dan parameter
+            shareLinkEl.innerHTML = `Link Anda: <a href="${domainUrl}" target="_blank">${domainUrl}</a><br>Share link ini ke device lain untuk akses utama.`;
             
             if ('Notification' in window) {
                 Notification.requestPermission();
