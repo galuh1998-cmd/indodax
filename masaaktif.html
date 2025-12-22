@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -101,8 +100,9 @@
             }
             startTime = parseInt(startTime);
             
-            const currentUrl = window.location.href;
-            shareLinkEl.innerHTML = `Link Anda: <a href="${currentUrl}" target="_blank">${currentUrl}</a>`;
+            // Link share otomatis menggunakan URL lengkap dengan domain hosting
+            const currentUrl = window.location.href; // Ini otomatis ambil https://explen.web.com/masaaktif.html?userId=xxx&name=yyy
+            shareLinkEl.innerHTML = `Link Anda: <a href="${currentUrl}" target="_blank">${currentUrl}</a><br>Share link ini ke device lain untuk sinkronisasi.`;
             
             if ('Notification' in window) {
                 Notification.requestPermission();
