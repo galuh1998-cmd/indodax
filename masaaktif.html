@@ -1,171 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masa Aktif Website</title>
+    <title>Masa Aktif Website Habis</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
         }
         .container {
+            max-width: 600px;
+            margin: 0 auto;
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
         }
-        .countdown {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ff1493;
-            margin-bottom: 20px;
+        h1 {
+            color: #d9534f;
         }
-        .message {
-            font-size: 1.2rem;
+        p {
+            font-size: 18px;
             color: #333;
-            margin-bottom: 20px;
         }
-        .expired {
-            color: #ff0000;
-        }
-        button {
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
             background-color: #25d366;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
+            border-radius: 5px;
         }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .share-link {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 10px;
+        a:hover {
+            background-color: #128c7e;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Masa Aktif Website</h1>
-        <div id="userInfo" class="message"></div>
-        <div class="message">Website aktif selama <span id="durationDisplay">7 hari</span>. Waktu tersisa:</div>
-        <div id="countdown" class="countdown">--:--:--:--</div>
-        <div id="status" class="message"></div>
-        <button id="extendBtn" onclick="extendViaWA()">Perpanjang via WhatsApp</button>
-        <div id="shareLink" class="share-link"></div>
+        <h1>Masa Aktif Website Habis</h1>
+        <p>Maaf, masa aktif website ini telah berakhir. Untuk memperpanjang, silakan hubungi kami melalui WhatsApp.</p>
+        <a href="https://wa.me/628989737043?text=Halo,%20saya%20ingin%20memperpanjang%20masa%20aktif%20website" target="_blank">Perpanjang via WhatsApp</a>
     </div>
-
-    <script>
-        const countdownEl = document.getElementById('countdown');
-        const statusEl = document.getElementById('status');
-        const extendBtn = document.getElementById('extendBtn');
-        const userInfoEl = document.getElementById('userInfo');
-        const shareLinkEl = document.getElementById('shareLink');
-        const durationDisplayEl = document.getElementById('durationDisplay');
-        
-        // Load durasi dari localStorage (default 7 hari jika belum diset)
-        let duration = parseInt(localStorage.getItem('activeDuration')) || (7 * 24 * 60 * 60 * 1000);
-        const durationDays = Math.floor(duration / (24 * 60 * 60 * 1000));
-        durationDisplayEl.textContent = `${durationDays} hari`;
-        
-        // Cek URL parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('userId');
-        const userName = urlParams.get('name');
-        
-        if (userId && userName) {
-            userInfoEl.textContent = `Halo, ${userName} (ID: ${userId})`;
-            
-            let startTime = localStorage.getItem(`startTime_${userId}`);
-            if (!startTime) {
-                startTime = Date.now();
-                localStorage.setItem(`startTime_${userId}`, startTime);
-            }
-            startTime = parseInt(startTime);
-            
-            // Link share otomatis menggunakan domain hosting utama saja (misalnya, https://explen.web.com)
-            const domainUrl = window.location.origin; // Ambil domain utama tanpa file dan parameter
-            shareLinkEl.innerHTML = `Link Anda: <a href="${domainUrl}" target="_blank">${domainUrl}</a><br>Share link ini ke device lain untuk akses utama.`;
-            
-            if ('Notification' in window) {
-                Notification.requestPermission();
-            }
-            
-            let notifiedAlmostExpired = false;
-            let notifiedExpired = false;
-            
-            function showNotification(title, body) {
-                if (Notification.permission === 'granted') {
-                    new Notification(title, { body: body, icon: 'https://via.placeholder.com/64' });
-                } else {
-                    alert(`${title}: ${body}`);
-                }
-            }
-            
-            function updateCountdown() {
-                const now = Date.now();
-                const elapsed = now - startTime;
-                const remaining = duration - elapsed;
-                
-                if (remaining <= 0) {
-                    countdownEl.textContent = '00:00:00:00';
-                    statusEl.textContent = 'Masa aktif habis! Hubungi untuk perpanjang.';
-                    statusEl.classList.add('expired');
-                    extendBtn.disabled = true;
-                    
-                    if (!notifiedExpired) {
-                        showNotification('Masa Aktif Habis', 'Masa aktif website telah habis! Perpanjang sekarang.');
-                        notifiedExpired = true;
-                    }
-                    return;
-                }
-                
-                if (remaining <= 60 * 60 * 1000 && !notifiedAlmostExpired) {
-                    showNotification('Masa Aktif Hampir Habis', 'Masa aktif hampir habis! Perpanjang sekarang.');
-                    notifiedAlmostExpired = true;
-                }
-                
-                const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-                
-                countdownEl.textContent = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-            
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-        } else {
-            userInfoEl.textContent = 'perpanjang mulai sekarang supaya di sulit mengurus web nya.';
-            countdownEl.textContent = 'N/A link indodax';
-            statusEl.textContent = 'perpanjang secepat mungkin agar tidak mati';
-            extendBtn.disabled = true;
-        }
-        
-        function extendViaWA() {
-            const phoneNumber = '628989737043'; // Ganti dengan nomor WhatsApp Anda
-            const message = encodeURIComponent('Saya ingin perpanjang masa aktif website.');
-            const url = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(url, '_blank');
-        }
-    </script>
 </body>
 </html>
