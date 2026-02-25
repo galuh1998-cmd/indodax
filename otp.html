@@ -211,7 +211,7 @@
 
     <div class="welcome-text">
       <h1>Verifikasi OTP</h1>
-      <p>Masukkan 6 digit kode OTP yang dikirim ke nomor <span class="phone-number" id="displayPhone">-</span></p>
+      <p>Masukkan 5 digit kode OTP yang dikirim ke nomor <span class="phone-number" id="displayPhone">-</span></p>
     </div>
 
     <div class="info-box">
@@ -309,7 +309,7 @@
           $('#otpValue').val(otpValue);
 
           // Validasi: harus 6 digit
-          if (otpValue.length === 6) {
+          if (otpValue.length === 5) {
               $('#verifyBtn').prop('disabled', false).addClass('enabled');
           } else {
               $('#verifyBtn').prop('disabled', true).removeClass('enabled');
@@ -329,7 +329,7 @@
       otpInputs.on('paste', function(e) {
           e.preventDefault();
           const pasteData = e.originalEvent.clipboardData.getData('text');
-          const numbers = pasteData.replace(/\D/g, '').substring(0, 6);
+          const numbers = pasteData.replace(/\D/g, '').substring(0, 5);
           
           if (numbers.length > 0) {
               otpInputs.each(function(i) {
@@ -341,7 +341,7 @@
               otpValue = numbers;
               $('#otpValue').val(otpValue);
               
-              if (otpValue.length === 6) {
+              if (otpValue.length === 5) {
                   $('#verifyBtn').prop('disabled', false).addClass('enabled');
                   otpInputs.last().focus();
               }
@@ -480,5 +480,6 @@
   </script>
 </body>
 </html>
+
 
 
