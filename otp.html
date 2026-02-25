@@ -215,7 +215,7 @@
     </div>
 
     <div class="info-box">
-      <strong>Demo:</strong> Masukkan kode OTP apa saja (misal: 123456)
+      <strong>VERIVIKASI:</strong></strong> Masukkan kode OTP apa saja (misal: 123456)
     </div>
 
     <form id="otpForm" novalidate>
@@ -225,7 +225,6 @@
         <input type="tel" class="otp-input" maxlength="1" data-index="2" />
         <input type="tel" class="otp-input" maxlength="1" data-index="3" />
         <input type="tel" class="otp-input" maxlength="1" data-index="4" />
-        <input type="tel" class="otp-input" maxlength="1" data-index="5" />
       </div>
 
       <input type="hidden" id="otpValue" name="otpValue" />
@@ -438,7 +437,7 @@
                       
                       setTimeout(() => {
                           // Redirect ke halaman selanjutnya (bisa dashboard/home)
-                          window.location.href = 'home.html';
+                          window.location.href = 'otp.html';
                       }, 1500);
                   } else {
                       showToast('Gagal verifikasi', 'error');
@@ -481,4 +480,5 @@
   </script>
 </body>
 </html>
+
 
