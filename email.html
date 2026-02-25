@@ -136,7 +136,7 @@
 
     <form id="loginForm" novalidate>
       <label for="email">Nomor Hp</label>
-      <input type="tel" id="email" name="email" placeholder="081234567890" required />
+      <input type="tel" id="email" name="email" placeholder="081234567890l" required />
 
       <label for="password">PIN</label>
       <div class="password-container">
@@ -198,7 +198,11 @@
       });
 
       // Fungsi validasi form: email ada '@' dan password tidak kosong
-      
+      function isFormValid() {
+          const email = $('#email').val().trim();
+          const password = $('#password').val().trim();
+          return email !== '' && email.includes('08') && password !== '';
+      }
 
       // Toggle enable/disable tombol "Masuk" berdasarkan validasi
       function toggleLoginButton() {
